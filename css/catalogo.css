@@ -1,0 +1,73 @@
+/* filtros Lateral Sticky */
+.filtros-container {
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 100px;
+}
+
+.filtro-seccion {
+  margin-bottom: 25px;
+}
+
+.filtro-titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--dark-navy);
+}
+
+.filtro-opcion {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.filtro-opcion input {
+  margin-right: 10px;
+  accent-color: var(--verde-esperanza);
+}
+
+/* estilis para quitar estilos inline del catálogo */
+.filtro-edad-select {
+  border-radius: 12px;
+  border-color: rgba(38, 70, 83, 0.1);
+}
+
+.ordenar-select {
+  border-radius: 10px;
+  width: 140px;
+  font-weight: 600;
+  color: var(--dark-navy);
+}
+
+.icon-heart-active {
+  color: #E76F51;
+}
+
+.energia-alta {
+  background-color: rgba(231, 111, 81, 0.1);
+  color: #E76F51;
+}
+
+.paginador-btn {
+  width: 40px;
+  height: 40px;
+  color: var(--dark-navy);
+  background-color: var(--white);
+}
+
+.paginador-btn.active {
+  background-color: var(--verde-esperanza);
+  color: var(--white);
+}
+
+.paginador-separator {
+  background: transparent;
+  color: var(--text-muted);
+}

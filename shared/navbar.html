@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fa-solid fa-paw"></i> Huellas Felices
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="catalogo.html">Catálogo</a>
+        </li>
+        <li class="nav-item" id="nav-dashboard">
+          <a class="nav-link" href="rescatista.html"><i class="fa-solid fa-gauge-high"></i> Panel Rescatista</a>
+        </li>
+        <li class="nav-item" id="nav-login">
+          <a class="nav-link" href="login.html">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item" id="nav-register">
+          <a class="nav-link" href="registrarse.html">Registrarse</a>
+        </li>
+        <li class="nav-item ms-lg-3" id="nav-adopt-btn">
+          <a class="btn btn-verde" href="catalogo.html">Adoptar Ahora</a>
+        </li>
+
+        <!-- logeado -->
+        <li class="nav-item dropdown" id="nav-user-menu">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="" alt="Avatar" class="rounded-circle nav-avatar">
+            <span>Elena</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
+            <li><a class="dropdown-item" href="rescatista.html"><i class="fa-solid fa-list-check me-2"></i> Mis
+                Mascotas</a></li>
+            <li><a class="dropdown-item" href="solicitudes.html"><i class="fa-solid fa-envelope-open-text me-2"></i>
+                Solicitudes</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger" href="#" id="btn-logout-click"><i
+                  class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

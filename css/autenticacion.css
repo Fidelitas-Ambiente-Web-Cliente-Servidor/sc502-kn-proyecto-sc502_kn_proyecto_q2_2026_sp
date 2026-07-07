@@ -1,0 +1,75 @@
+.auth-main {
+  min-height: calc(100vh - 200px);
+}
+
+.auth-card {
+  border-radius: 24px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+  border: none;
+  background-color: var(--white);
+  padding: 40px;
+}
+
+.auth-card-login {
+  max-width: 480px;
+}
+
+.auth-card-registro {
+  max-width: 520px;
+}
+
+.auth-input {
+  border-radius: 10px !important;
+}
+
+.input-left-radius {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.input-right-radius {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+.auth-checkbox {
+  accent-color: var(--verde-esperanza);
+}
+
+/* Boton de enviar */
+.auth-btn {
+  border-radius: 12px !important;
+}
+
+.auth-link {
+  color: var(--verde-esperanza);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.auth-link:hover {
+  color: var(--dark-navy);
+  text-decoration: underline;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--verde-esperanza);
+  box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25);
+}
+
+.input-group-text {
+  color: var(--dark-navy);
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.text-verde {
+  color: var(--verde-esperanza);
+}
