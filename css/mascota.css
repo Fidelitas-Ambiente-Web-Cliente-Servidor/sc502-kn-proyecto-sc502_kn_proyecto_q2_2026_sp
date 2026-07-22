@@ -1,0 +1,46 @@
+.mascota-img-main {
+  height: 450px;
+}
+
+.mascota-img-thumb {
+  height: 100px;
+}
+
+.mascota-img-thumb.active-thumb {
+  border: 2px solid var(--verde-esperanza);
+}
+
+.mascota-thumb-overlay {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.text-dark-navy {
+  color: var(--dark-navy) !important;
+}
+
+.mascota-historia-text {
+  line-height: 1.8;
+}
+
+.mascota-title-lg {
+  font-size: 3rem;
+}
+
+.btn-icon-lg {
+  width: 50px;
+  height: 50px;
+  color: var(--text-muted);
+}
+
+.bg-soft-gray {
+  background-color: var(--soft-gray) !important;
+}
+
+.form-control-light {
+  background-color: #FAFAFA !important;
+}
+
+.avatar-md {
+  width: 50px;
+  height: 50px;
+}
