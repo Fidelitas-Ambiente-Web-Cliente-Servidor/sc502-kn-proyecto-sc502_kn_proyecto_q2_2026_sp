@@ -1,4 +1,4 @@
-<footer class="footer-section">
+<footer class="custom-footer">
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-4 col-md-6">
