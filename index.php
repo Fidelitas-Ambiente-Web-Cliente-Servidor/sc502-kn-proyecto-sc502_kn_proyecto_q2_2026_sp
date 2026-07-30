@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // accion o vista que el usuario quiere cargar
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
@@ -8,7 +10,10 @@ $rutas = [
     'catalogo' => ['controller' => 'MascotaController', 'method' => 'catalogo'],
     'mascota' => ['controller' => 'MascotaController', 'method' => 'detalle'],
     'login' => ['controller' => 'UsuarioController', 'method' => 'login'],
+    'login_post' => ['controller' => 'UsuarioController', 'method' => 'loginPost'],
     'registrarse' => ['controller' => 'UsuarioController', 'method' => 'registrarse'],
+    'registro_post' => ['controller' => 'UsuarioController', 'method' => 'registroPost'],
+    'logout' => ['controller' => 'UsuarioController', 'method' => 'logout'],
     'rescatista' => ['controller' => 'UsuarioController', 'method' => 'rescatista']
 ];
 

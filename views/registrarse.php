@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Huellas Felices - Registrarse";
 $extra_css = "autenticacion.css";
 include 'layout/header.php';
@@ -12,37 +12,42 @@ include 'layout/header.php';
       <p class="text-secondary small">Únete y empieza a publicar perfiles de mascotas para adopción.</p>
     </div>
 
-    <form id="form-registro" class="needs-validation" novalidate>
+    <?php if (isset($_GET['error'])): ?>
+      <div class="alert alert-danger text-center small fw-semibold">Hubo un error al crear la cuenta. Por favor intenta de nuevo.</div>
+    <?php endif; ?>
+
+    <form id="form-registro" action="index.php?action=registro_post" method="POST" class="needs-validation" novalidate>
       <div class="mb-3">
-        <label for="regNombre" class="form-label fw-600">Nombre Completo *</label>
-        <input type="text" class="form-control border-2 auth-input" id="regNombre" placeholder="Tu nombre" required>
+        <label for="regNombre" class="form-label fw-600">Nombre *</label>
+        <input type="text" name="nombre" class="form-control border-2 auth-input" id="regNombre" placeholder="Tu nombre" required>
         <div class="invalid-feedback">Por favor ingresa tu nombre completo.</div>
       </div>
 
       <div class="mb-3">
-        <label for="regOrganizacion" class="form-label fw-600">Nombre de Organización o Refugio (Opcional)</label>
-        <input type="text" class="form-control border-2 auth-input" id="regOrganizacion"
-          placeholder="Ej. Refugio Patitas Felices">
+        <label for="regApellido" class="form-label fw-600">Apellido *</label>
+        <input type="text" name="apellido" class="form-control border-2 auth-input" id="regApellido"
+          placeholder="Tu apellido" required>
+        <div class="invalid-feedback">Por favor ingresa tu apellido.</div>
       </div>
 
       <div class="mb-3">
         <label for="regEmail" class="form-label fw-600">Correo Electrónico *</label>
-        <input type="email" class="form-control border-2 auth-input" id="regEmail" placeholder="correo@refugio.com"
+        <input type="email" name="correo" class="form-control border-2 auth-input" id="regEmail" placeholder="correo@ejemplo.com"
           required>
         <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
       </div>
 
       <div class="mb-3">
         <label for="regPassword" class="form-label fw-600">Contraseña *</label>
-        <input type="password" class="form-control border-2 auth-input" id="regPassword"
+        <input type="password" name="contrasena" class="form-control border-2 auth-input" id="regPassword"
           placeholder="Crea una contraseña segura" required>
         <div class="invalid-feedback">Ingresa una contraseña.</div>
       </div>
 
       <div class="mb-4">
-        <label for="regPasswordConfirm" class="form-label fw-600">Confirmar Contraseña *</label>
-        <input type="password" class="form-control border-2 auth-input" id="regPasswordConfirm"
-          placeholder="Repite tu contraseña" required>
+        <label for="regTelefono" class="form-label fw-600">Teléfono (Opcional)</label>
+        <input type="text" name="telefono" class="form-control border-2 auth-input" id="regTelefono"
+          placeholder="Ej. 8888-8888">
         <div class="invalid-feedback">Confirma tu contraseña.</div>
       </div>
 

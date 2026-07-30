@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Huellas Felices - Panel Rescatista";
 $extra_css = "rescatista.css";
 include 'layout/header.php';
@@ -112,22 +112,24 @@ include 'layout/header.php';
                         class="fa-regular fa-trash-can"></i></button>
                   </td>
                 </tr>
+              </tbody>
+            </table>
 
-                <div class="p-4 border-top border-light-subtle d-flex justify-content-between align-items-center">
-                  <span class="text-muted small fw-semibold">Mostrando 1-3 de 12 mascotas</span>
-                  <div class="d-flex gap-2">
-                    <button
-                      class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
-                        class="fa-solid fa-chevron-left"></i></button>
-                    <button
-                      class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
-                    <button
-                      class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
-                    <button
-                      class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
-                        class="fa-solid fa-chevron-right"></i></button>
-                  </div>
-                </div>
+            <div class="p-4 border-top border-light-subtle d-flex justify-content-between align-items-center">
+              <span class="text-muted small fw-semibold">Mostrando 1-3 de 12 mascotas</span>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
+                    class="fa-solid fa-chevron-left"></i></button>
+                <button
+                  class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
+                <button
+                  class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
+                <button
+                  class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
+                    class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
           </div>
         </div>
 
