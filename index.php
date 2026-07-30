@@ -2,15 +2,26 @@
 // accion o vista que el usuario quiere cargar
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-// evitamos que el usuario acceda a archivos que no existan
-$allowed_views = ['index', 'catalogo', 'login', 'mascota', 'registrarse', 'rescatista'];
+// controladores y métodos
+$rutas = [
+    'index' => ['controller' => 'HomeController', 'method' => 'index'],
+    'catalogo' => ['controller' => 'MascotaController', 'method' => 'catalogo'],
+    'mascota' => ['controller' => 'MascotaController', 'method' => 'detalle'],
+    'login' => ['controller' => 'UsuarioController', 'method' => 'login'],
+    'registrarse' => ['controller' => 'UsuarioController', 'method' => 'registrarse'],
+    'rescatista' => ['controller' => 'UsuarioController', 'method' => 'rescatista']
+];
 
-if (in_array($action, $allowed_views)) {
-    //  llamado a los controladores
-    include_once "views/{$action}.php";
+if (array_key_exists($action, $rutas)) {
+    $controllerName = $rutas[$action]['controller'];
+    $methodName = $rutas[$action]['method'];
+
+    require_once "controllers/{$controllerName}.php";
+
+    $controller = new $controllerName();
+    $controller->$methodName();
 } else {
     // error 404 
     echo "<h1>404 - pagina no encontrada</h1>";
 }
-
 

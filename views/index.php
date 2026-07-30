@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Huellas Felices - Inicio";
 $extra_css = "index.css";
 include 'layout/header.php';
@@ -105,76 +105,34 @@ include 'layout/header.php';
       </div>
 
       <div class="row g-4">
+        <?php foreach ($mascotas as $mascota): ?>
         <div class="col-lg-4 col-md-6">
           <div class="mascota-card">
             <div class="mascota-img-container">
-              <span class="mascota-badge mascota-badge-verde">Nuevo</span>
-              <img src="" alt="Max Perro" class="mascota-img">
-              <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            </div>
-            <div class="mascota-card-body">
-              <h4 class="fw-bold h5 mb-2">Max</h4>
-              <div class="mascota-info-row">
-                <span><i class="fa-solid fa-dog me-1"></i> Joven</span>
-                <span>&bull;</span>
-                <span>Mediano</span>
-              </div>
-              <p class="text-muted small mb-3">Un compañero leal que ama las caminatas largas y correr en el parque.
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="mascota-energia-tag">Energía Alta</span>
-                <a href="index.php?action=mascota" class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="mascota-card">
-            <div class="mascota-img-container">
-              <img src="" alt="Luna Gato" class="mascota-img">
-              <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            </div>
-            <div class="mascota-card-body">
-              <h4 class="fw-bold h5 mb-2">Luna</h4>
-              <div class="mascota-info-row">
-                <span><i class="fa-solid fa-cat me-1"></i> Adulto</span>
-                <span>&bull;</span>
-                <span>Pequeña</span>
-              </div>
-              <p class="text-muted small mb-3">La reina del sofá. Tranquila, cariñosa y amante de las siestas largas
-                al sol.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="mascota-energia-tag energia-baja">Energía Baja</span>
-                <a href="index.php?action=mascota" class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="mascota-card">
-            <div class="mascota-img-container">
+              <?php if($mascota['estado'] == 'Urgente'): ?>
               <span class="mascota-badge bg-warning text-dark">Urgente</span>
-              <img src="" alt="Pipo Perro" class="mascota-img">
+              <?php else: ?>
+              <span class="mascota-badge mascota-badge-verde">Nuevo</span>
+              <?php endif; ?>
+              <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/300') ?>" alt="<?= htmlspecialchars($mascota['nombre']) ?>" class="mascota-img">
               <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             </div>
             <div class="mascota-card-body">
-              <h4 class="fw-bold h5 mb-2">Pipo</h4>
+              <h4 class="fw-bold h5 mb-2"><?= htmlspecialchars($mascota['nombre']) ?></h4>
               <div class="mascota-info-row">
-                <span><i class="fa-solid fa-dog me-1"></i> Cachorro</span>
+                <span><i class="fa-solid <?= $mascota['especie_id'] == 2 ? 'fa-cat' : 'fa-dog' ?> me-1"></i> <?= htmlspecialchars($mascota['edad']) ?> meses</span>
                 <span>&bull;</span>
-                <span>Mini</span>
+                <span><?= htmlspecialchars($mascota['tamano']) ?></span>
               </div>
-              <p class="text-muted small mb-3">Pequeño en tamaño pero grande en personalidad. Juguetón y súper
-                sociable.</p>
+              <p class="text-muted small mb-3"><?= htmlspecialchars(substr($mascota['historia'], 0, 80)) ?>...</p>
               <div class="d-flex justify-content-between align-items-center">
-                <span class="mascota-energia-tag">Energía Media</span>
-                <a href="index.php?action=mascota" class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
+                <span class="mascota-energia-tag <?= $mascota['energia_id'] == 1 ? 'energia-baja' : '' ?>"><?= htmlspecialchars($mascota['energia']) ?></span>
+                <a href="index.php?action=mascota&id=<?= $mascota['id'] ?>" class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
               </div>
             </div>
           </div>
         </div>
+        <?php endforeach; ?>
   </section>
 
 

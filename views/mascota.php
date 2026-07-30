@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Huellas Felices - Detalle de Mascota";
 $extra_css = "mascota.css";
 include 'layout/header.php';
@@ -48,15 +48,9 @@ include 'layout/header.php';
 
         <!-- Historia -->
         <div class="mascota-historia bg-soft-gray p-4 p-md-5 rounded-4 mb-4">
-          <h3 class="fw-bold mb-4 text-dark-navy">Historia de Bruno</h3>
+          <h3 class="fw-bold mb-4 text-dark-navy">Historia de <?= htmlspecialchars($mascota['nombre']) ?></h3>
           <p class="text-secondary mb-4 fs-5 mascota-historia-text">
-            Bruno fue rescatado de un parque local donde buscaba refugio de la lluvia. A pesar de su comienzo dificil,
-            es el perro mas agradecido y cariñoso que hemos conocido. Tiene una personalidad equilibrada: le encanta
-            correr por las mañanas pero disfruta igualmente de una tarde tranquila de siesta a tus pies.
-          </p>
-          <p class="text-secondary mb-0 fs-5 mascota-historia-text">
-            Es ideal para una familia con niños o una persona activa que busque un compañero de caminatas. Sabe
-            sentarse, dar la pata y camina perfectamente con correa. ¡Está listo para encontrar su hogar definitivo!
+            <?= htmlspecialchars($mascota['historia']) ?>
           </p>
         </div>
       </div>
@@ -65,9 +59,9 @@ include 'layout/header.php';
       <div class="col-lg-5">
         <div class="d-flex justify-content-between align-items-start mb-2">
           <div>
-            <h1 class="fw-extrabold mb-1 text-dark-navy mascota-title-lg">Bruno</h1>
-            <p class="text-verde mb-4 fw-semibold"><i class="fa-solid fa-location-dot me-2"></i>Rescatado en Buenos
-              Aires</p>
+            <h1 class="fw-extrabold mb-1 text-dark-navy mascota-title-lg"><?= htmlspecialchars($mascota['nombre']) ?>
+            </h1>
+            <p class="text-verde mb-4 fw-semibold"><i class="fa-solid fa-location-dot me-2"></i>Esperando adopción</p>
           </div>
           <button class="btn btn-light rounded-circle shadow-sm btn-icon-lg"><i
               class="fa-regular fa-heart fs-4"></i></button>
@@ -77,25 +71,25 @@ include 'layout/header.php';
           <div class="col-6">
             <div class="spec-card p-3 rounded-3 bg-soft-gray">
               <small class="text-muted text-uppercase fw-semibold mb-1 d-block">Edad</small>
-              <p class="mb-0 fw-medium fs-5 text-dark-navy">2 años</p>
+              <p class="mb-0 fw-medium fs-5 text-dark-navy"><?= htmlspecialchars($mascota['edad']) ?> meses</p>
             </div>
           </div>
           <div class="col-6">
             <div class="spec-card p-3 rounded-3 bg-soft-gray">
               <small class="text-muted text-uppercase fw-semibold mb-1 d-block">Raza</small>
-              <p class="mb-0 fw-medium fs-5 text-dark-navy">Mestizo</p>
+              <p class="mb-0 fw-medium fs-5 text-dark-navy"><?= htmlspecialchars($mascota['nombre_raza']) ?></p>
             </div>
           </div>
           <div class="col-6">
             <div class="spec-card p-3 rounded-3 bg-soft-gray">
               <small class="text-muted text-uppercase fw-semibold mb-1 d-block">Tamaño</small>
-              <p class="mb-0 fw-medium fs-5 text-dark-navy">Mediano</p>
+              <p class="mb-0 fw-medium fs-5 text-dark-navy"><?= htmlspecialchars($mascota['tamano']) ?></p>
             </div>
           </div>
           <div class="col-6">
             <div class="spec-card p-3 rounded-3 bg-soft-gray">
               <small class="text-warning text-uppercase fw-semibold mb-1 d-block">Energía</small>
-              <p class="mb-0 fw-medium fs-5 text-dark-navy">Media</p>
+              <p class="mb-0 fw-medium fs-5 text-dark-navy"><?= htmlspecialchars($mascota['energia']) ?></p>
             </div>
           </div>
         </div>
@@ -119,7 +113,7 @@ include 'layout/header.php';
             <div class="mb-4">
               <label class="form-label text-muted small fw-semibold">Mensaje para el Rescatista</label>
               <textarea class="form-control form-control-lg rounded-3 border-light-subtle form-control-light" rows="4"
-                placeholder="CuÃ©ntanos un poco sobre tu hogar..."></textarea>
+                placeholder="Cuéntanos un poco sobre tu hogar..."></textarea>
             </div>
             <button type="submit"
               class="btn btn-verde w-100 btn-lg mb-4 rounded-3 d-flex justify-content-center align-items-center gap-2">
@@ -132,8 +126,10 @@ include 'layout/header.php';
           <div class="d-flex align-items-center gap-3">
             <img src="" alt="" class="rounded-circle object-fit-cover avatar-md">
             <div>
-              <p class="mb-0 text-muted small">Rescatista: <span class="fw-bold text-dark">Ana Lopez</span></p>
-              <p class="mb-0 text-verde small fw-semibold">Responde en menos de 24hs</p>
+              <p class="mb-0 text-muted small">Rescatista: <span
+                  class="fw-bold text-dark"><?= htmlspecialchars($mascota['rescatista_nombre']) ?></span></p>
+              <p class="mb-0 text-verde small fw-semibold">Contacto:
+                <?= htmlspecialchars($mascota['rescatista_telefono']) ?></p>
             </div>
           </div>
         </div>
