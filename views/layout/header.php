@@ -65,6 +65,7 @@
                       class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text me-2"></i> Solicitudes</a>
                 </li>
+                <li><a class="dropdown-item" href="index.php?action=perfil"><i class="fa-solid fa-user-pen me-2"></i> Mi Perfil</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>

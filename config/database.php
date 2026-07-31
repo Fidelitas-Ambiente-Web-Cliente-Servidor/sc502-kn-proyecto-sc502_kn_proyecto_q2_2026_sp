@@ -27,7 +27,7 @@ class Database
     }
 
     // obtener la unica instancia de la conexion
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -36,7 +36,7 @@ class Database
     }
 
     // obtener el objeto pdo
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->connection;
     }

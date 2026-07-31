@@ -110,3 +110,14 @@ INSERT INTO mascotas (usuario_id, especie_id, raza_id, tamano_id, energia_id, no
 (1, 1, 1, 3, 3, 'Max', 12, 'Un compañero leal que ama las caminatas largas y correr en el parque. Fue encontrado vagando en la calle.', '', 'Disponible'),
 (1, 2, 5, 2, 1, 'Luna', 36, 'La reina del sofá. Tranquila, cariñosa y amante de las siestas largas al sol.', '', 'Disponible'),
 (1, 1, 1, 1, 2, 'Pipo', 3, 'Pequeño en tamaño pero grande en personalidad. Juguetón y súper sociable.', '', 'Urgente');
+
+--alter table para el sprint 6
+ALTER TABLE solicitudes 
+DROP FOREIGN KEY solicitudes_ibfk_2; 
+
+ALTER TABLE solicitudes
+DROP COLUMN usuario_id,
+CHANGE COLUMN estado_solicitud estado ENUM('Pendiente', 'Aprobada', 'Rechazada') DEFAULT 'Pendiente',
+CHANGE COLUMN fecha_envio created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN nombre_adoptante VARCHAR(100) NOT NULL AFTER mascota_id,
+ADD COLUMN correo_adoptante VARCHAR(150) NOT NULL AFTER nombre_adoptante;

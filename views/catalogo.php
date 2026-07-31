@@ -17,42 +17,24 @@ include 'layout/header.php';
         <hr class="mb-4">
 
         <!-- Filtros -->
-        <!-- esto despues va a ser manejado por js -->
         <div class="filtro-seccion">
-          <h4 class="filtro-titulo">Tamaño</h4>
+          <h4 class="filtro-titulo">Especie</h4>
           <label class="filtro-opcion">
-            <input type="checkbox" name="tamano" value="pequeno"> Pequeño
+            <input type="checkbox" class="filtro-chk" data-tipo="especie" value="perro"> Perros
           </label>
           <label class="filtro-opcion">
-            <input type="checkbox" name="tamano" value="mediano" checked> Mediano
-          </label>
-          <label class="filtro-opcion">
-            <input type="checkbox" name="tamano" value="grande"> Grande
+            <input type="checkbox" class="filtro-chk" data-tipo="especie" value="gato"> Gatos
           </label>
         </div>
-        <!-- energia -->
+        <!-- estado -->
         <div class="filtro-seccion">
-          <h4 class="filtro-titulo">Nivel de Energía</h4>
+          <h4 class="filtro-titulo">Estado</h4>
           <label class="filtro-opcion">
-            <input type="radio" name="energia" value="bajo"> Bajo
+            <input type="checkbox" class="filtro-chk" data-tipo="estado" value="disponible"> Disponible
           </label>
           <label class="filtro-opcion">
-            <input type="radio" name="energia" value="medio" checked> Medio
+            <input type="checkbox" class="filtro-chk" data-tipo="estado" value="urgente"> Urgente
           </label>
-          <label class="filtro-opcion">
-            <input type="radio" name="energia" value="alto"> Alto
-          </label>
-        </div>
-        <!-- edad -->
-        <div class="filtro-seccion">
-          <h4 class="filtro-titulo">Edad</h4>
-          <select class="form-select border-2 filtro-edad-select" id="filtro-edad">
-            <option value="" disabled>Seleccione edad...</option>
-            <option value="cachorro">Cachorro</option>
-            <option value="joven">Joven</option>
-            <option value="adulto" selected>Adulto</option>
-            <option value="senior">Senior</option>
-          </select>
         </div>
         <button class="btn btn-outline-verde w-100 mt-3" type="button" id="btn-clear-filters">Limpiar Filtros</button>
       </div>
@@ -77,7 +59,7 @@ include 'layout/header.php';
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
         <?php foreach ($mascotas as $mascota): ?>
-        <div class="col">
+        <div class="col mascota-item" data-especie="<?= htmlspecialchars(strtolower($mascota['nombre_especie'] ?? '')) ?>" data-estado="<?= htmlspecialchars(strtolower($mascota['estado'] ?? '')) ?>">
           <div class="mascota-card">
             <div class="mascota-img-container">
               <?php if($mascota['estado'] == 'Urgente'): ?>
@@ -103,36 +85,19 @@ include 'layout/header.php';
           </div>
         </div>
         <?php endforeach; ?>
+      </div>
 
-
-
-        <!-- Paginador del catalogo -->
+      <!-- Paginador del catalogo -->
         <nav class="d-flex justify-content-center mt-5">
-          <ul class="pagination gap-2 border-0">
-            <li class="page-item">
-              <a class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn"
-                href="#"><i class="fa-solid fa-chevron-left"></i></a>
-            </li>
-            <li class="page-item"><a
-                class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn active"
-                href="#">1</a></li>
-            <li class="page-item"><a
-                class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn"
-                href="#">2</a></li>
-            <li class="page-item"><a
-                class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn"
-                href="#">3</a></li>
-            <li class="page-item disabled"><span
-                class="page-link border-0 d-flex align-items-center justify-content-center paginador-separator">...</span>
-            </li>
-            <li class="page-item"><a
-                class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn"
-                href="#">8</a></li>
-            <li class="page-item">
-              <a class="page-link border-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm paginador-btn"
-                href="#"><i class="fa-solid fa-chevron-right"></i></a>
-            </li>
-          </ul>
+          <div class="d-flex gap-2">
+            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
+            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
+            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">3</button>
+            <button class="btn btn-link rounded-circle d-flex align-items-center justify-content-center fw-semibold text-secondary text-decoration-none bg-transparent border-0" disabled>...</button>
+            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">8</button>
+            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </nav>
 
     </section>

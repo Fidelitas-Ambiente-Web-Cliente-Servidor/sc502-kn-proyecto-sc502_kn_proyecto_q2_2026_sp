@@ -41,7 +41,7 @@ include 'layout/header.php';
           <span class="input-group-text bg-light border-2 border-end-0 input-left-radius"><i
               class="fa-solid fa-lock text-muted"></i></span>
           <input type="password" name="contrasena" class="form-control border-2 border-start-0 input-right-radius"
-            id="loginPassword" placeholder="••••••••••" required value="123456">
+            id="loginPassword" placeholder="••••••••••" required value="password">
           <div class="invalid-feedback">Ingresa tu contraseña de rescatista.</div>
         </div>
       </div>

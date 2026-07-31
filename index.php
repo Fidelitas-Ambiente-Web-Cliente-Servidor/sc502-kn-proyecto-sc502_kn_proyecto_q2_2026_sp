@@ -14,7 +14,9 @@ $rutas = [
     'registrarse' => ['controller' => 'UsuarioController', 'method' => 'registrarse'],
     'registro_post' => ['controller' => 'UsuarioController', 'method' => 'registroPost'],
     'logout' => ['controller' => 'UsuarioController', 'method' => 'logout'],
-    'rescatista' => ['controller' => 'UsuarioController', 'method' => 'rescatista']
+    'rescatista' => ['controller' => 'UsuarioController', 'method' => 'rescatista'],
+    'perfil' => ['controller' => 'UsuarioController', 'method' => 'perfil'],
+    'perfil_post' => ['controller' => 'UsuarioController', 'method' => 'actualizarPerfil']
 ];
 
 if (array_key_exists($action, $rutas)) {

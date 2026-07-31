@@ -86,10 +86,56 @@ class UsuarioController
     public function rescatista()
     {
         if (!isset($_SESSION['usuario_id'])) {
+        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
             header("Location: index.php?action=login");
             exit();
         }
         require_once 'views/rescatista.php';
+    }
+
+    // vista de perfil
+    public function perfil()
+    {
+        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
+            header("Location: index.php?action=login");
+            exit();
+        }
+        $usuarioModel = new Usuario();
+        $usuario = $usuarioModel->getById($_SESSION['usuario_id']);
+        require_once 'views/perfil.php';
+    }
+
+    // actualizacion de perfil
+    public function actualizarPerfil()
+    {
+        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
+            header("Location: index.php?action=login");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuarioModel = new Usuario();
+
+            $datos = [
+                'nombre' => $_POST['nombre'],
+                'apellido' => $_POST['apellido'],
+                'telefono' => $_POST['telefono']
+            ];
+
+            if (!empty($_POST['contrasena'])) {
+                $datos['contrasena'] = password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
+            }
+
+            if ($usuarioModel->update($_SESSION['usuario_id'], $datos)) {
+                // update session name
+                $_SESSION['usuario_nombre'] = $_POST['nombre'];
+                header("Location: index.php?action=perfil&success=1");
+                exit();
+            } else {
+                header("Location: index.php?action=perfil&error=1");
+                exit();
+            }
+        }
     }
 }
 ?>

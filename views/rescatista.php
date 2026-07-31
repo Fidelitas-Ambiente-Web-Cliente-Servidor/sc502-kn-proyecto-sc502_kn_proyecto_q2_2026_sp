@@ -92,7 +92,7 @@ include 'layout/header.php';
                 <tr>
                   <td class="ps-4 py-3">
                     <div class="d-flex align-items-center gap-3">
-                      <img src="" alt="" class="rounded-3 object-fit-cover avatar-md">
+                      <img src="https://via.placeholder.com/150" alt="" class="rounded-3 object-fit-cover avatar-md">
                       <div>
                         <h6 class="mb-0 fw-bold text-dark">Bruno</h6>
                         <small class="text-muted">Perro • 2 años</small>
