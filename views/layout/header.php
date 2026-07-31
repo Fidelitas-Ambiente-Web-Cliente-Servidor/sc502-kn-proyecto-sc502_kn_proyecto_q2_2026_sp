@@ -38,9 +38,6 @@
             <li class="nav-item" id="nav-login">
               <a class="nav-link" href="index.php?action=login">Iniciar Sesión</a>
             </li>
-            <li class="nav-item" id="nav-register">
-              <a class="nav-link" href="index.php?action=registrarse">Registrarse</a>
-            </li>
             <!-- proteccion del menu, solo el usuario no logueado -->
           <?php else: ?>
             <li class="nav-item" id="nav-dashboard">
@@ -65,7 +62,8 @@
                       class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text me-2"></i> Solicitudes</a>
                 </li>
-                <li><a class="dropdown-item" href="index.php?action=perfil"><i class="fa-solid fa-user-pen me-2"></i> Mi Perfil</a></li>
+                <li><a class="dropdown-item" href="index.php?action=perfil"><i class="fa-solid fa-user-pen me-2"></i> Mi
+                    Perfil</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>

@@ -95,33 +95,44 @@ include 'layout/header.php';
                   </tr>
                 <?php else: ?>
                   <?php foreach ($mascotas as $mascota): ?>
-                  <tr>
-                    <td class="ps-4 py-3">
-                      <div class="d-flex align-items-center gap-3">
-                        <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/150') ?>" alt="" class="rounded-3 object-fit-cover avatar-md" style="width: 50px; height: 50px;">
-                        <div>
-                          <h6 class="mb-0 fw-bold text-dark"><?= htmlspecialchars($mascota['nombre']) ?></h6>
-                          <small class="text-muted"><?= htmlspecialchars($mascota['nombre_especie']) ?> • <?= $mascota['edad'] ?> años</small>
+                    <tr>
+                      <td class="ps-4 py-3">
+                        <div class="d-flex align-items-center gap-3">
+                          <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/150') ?>"
+                            alt="" class="rounded-3 object-fit-cover avatar-md" style="width: 50px; height: 50px;">
+                          <div>
+                            <h6 class="mb-0 fw-bold text-dark"><?= htmlspecialchars($mascota['nombre']) ?></h6>
+                            <small class="text-muted"><?= htmlspecialchars($mascota['nombre_especie']) ?> •
+                              <?= $mascota['edad'] ?> años</small>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td class="py-3">
-                      <?php 
-                        $badgeClass = '';
-                        if ($mascota['estado'] == 'Disponible') $badgeClass = 'bg-success';
-                        else if ($mascota['estado'] == 'Urgente') $badgeClass = 'bg-danger';
-                        else $badgeClass = 'bg-secondary';
-                      ?>
-                      <span class="badge rounded-pill fw-semibold <?= $badgeClass ?>"><?= htmlspecialchars($mascota['estado']) ?></span>
-                    </td>
-                    <td class="py-3 text-secondary">
-                      <?= date('d M Y', strtotime($mascota['fecha_publicacion'])) ?>
-                    </td>
-                    <td class="pe-4 py-3 text-end">
-                      <a href="index.php?action=mascota_editar&id=<?= $mascota['id'] ?>" class="btn btn-sm btn-link text-verde p-0 me-3 fs-5" title="Editar"><i class="fa-solid fa-pen"></i></a>
-                      <a href="index.php?action=mascota_eliminar&id=<?= $mascota['id'] ?>" class="btn btn-sm btn-link text-warning p-0 fs-5" title="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta mascota?');"><i class="fa-regular fa-trash-can"></i></a>
-                    </td>
-                  </tr>
+                      </td>
+                      <td class="py-3">
+                          <?php
+                          $badgeClass = '';
+                          if ($mascota['estado'] == 'Disponible')
+                            $badgeClass = 'bg-success';
+                          else if ($mascota['estado'] == 'Urgente')
+                            $badgeClass = 'bg-danger';
+                          else
+                            $badgeClass = 'bg-secondary';
+                          ?>
+                        <span
+                          class="badge rounded-pill fw-semibold <?= $badgeClass ?>"><?= htmlspecialchars($mascota['estado']) ?></span>
+                      </td>
+                      <td class="py-3 text-secondary">
+                          <?= date('d M Y', strtotime($mascota['fecha_publicacion'])) ?>
+                      </td>
+                      <td class="pe-4 py-3 text-end">
+                        <a href="index.php?action=mascota_editar&id=<?= $mascota['id'] ?>"
+                          class="btn btn-sm btn-link text-verde p-0 me-3 fs-5" title="Editar"><i
+                            class="fa-solid fa-pen"></i></a>
+                        <a href="index.php?action=mascota_eliminar&id=<?= $mascota['id'] ?>"
+                          class="btn btn-sm btn-link text-warning p-0 fs-5" title="Eliminar"
+                          onclick="return confirm('¿Estás seguro de que deseas eliminar esta mascota?');"><i
+                            class="fa-regular fa-trash-can"></i></a>
+                      </td>
+                    </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>
               </tbody>
