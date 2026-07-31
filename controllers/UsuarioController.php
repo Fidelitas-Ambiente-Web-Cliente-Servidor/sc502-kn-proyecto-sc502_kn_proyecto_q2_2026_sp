@@ -10,6 +10,7 @@ class UsuarioController
             header("Location: index.php?action=rescatista");
             exit();
         }
+        $extra_js = "auth.js";
         require_once 'views/login.php';
     }
 
@@ -46,6 +47,7 @@ class UsuarioController
             header("Location: index.php?action=rescatista");
             exit();
         }
+        $extra_js = "auth.js";
         require_once 'views/registrarse.php';
     }
 
@@ -89,6 +91,7 @@ class UsuarioController
             header("Location: index.php?action=login");
             exit();
         }
+        $extra_js = "rescatista.js";
         require_once 'views/rescatista.php';
     }
 

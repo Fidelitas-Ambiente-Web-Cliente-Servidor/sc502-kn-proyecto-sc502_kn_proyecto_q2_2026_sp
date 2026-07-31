@@ -7,6 +7,7 @@ class MascotaController
     {
         $mascotaModel = new Mascota();
         $mascotas = $mascotaModel->getAll();
+        $extra_js = "catalogo.js";
 
         require_once 'views/catalogo.php';
     }
@@ -17,6 +18,7 @@ class MascotaController
             $id = $_GET['id'];
             $mascotaModel = new Mascota();
             $mascota = $mascotaModel->getById($id);
+            $extra_js = "adopcion.js";
 
             if ($mascota) {
                 require_once 'views/mascota.php';

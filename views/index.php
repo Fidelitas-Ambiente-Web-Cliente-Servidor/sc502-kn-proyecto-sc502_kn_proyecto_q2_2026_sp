@@ -58,7 +58,7 @@ include 'layout/header.php';
         <div class="col-md-4">
           <div class="pasos-card text-center">
             <div class="icon-box mx-auto">
-              <i class="fa-solid fa-magnifying-glass-paw"></i>
+              <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <h4 class="fw-bold h5">1. Busca y Explora</h4>
             <p class="text-muted small mb-0">Filtra por especie, tamaño, edad y personalidad en nuestro catálogo
