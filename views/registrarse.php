@@ -8,8 +8,8 @@ include 'layout/header.php';
   <div class="card p-md-5 border-0 bg-white mx-auto auth-card auth-card-registro">
     <div class="text-center mb-4">
       <i class="fa-solid fa-paw fs-1 text-verde mb-2"></i>
-      <h1 class="h3 fw-bold">Crear Cuenta de Rescatista</h1>
-      <p class="text-secondary small">Únete y empieza a publicar perfiles de mascotas para adopción.</p>
+      <h1 class="h3 fw-bold">Crear Cuenta</h1>
+      <p class="text-secondary small">Únete a Huellas Felices y ayúdanos a cambiar vidas.</p>
     </div>
 
     <?php if (isset($_GET['error'])): ?>
@@ -48,7 +48,18 @@ include 'layout/header.php';
         <label for="regTelefono" class="form-label fw-600">Teléfono (Opcional)</label>
         <input type="text" name="telefono" class="form-control border-2 auth-input" id="regTelefono"
           placeholder="Ej. 8888-8888">
-        <div class="invalid-feedback">Confirma tu contraseña.</div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-600 d-block">¿Qué deseas hacer en la plataforma? *</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="rol_id" id="rolAdoptante" value="3" required checked>
+          <label class="form-check-label" for="rolAdoptante">Quiero adoptar</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="rol_id" id="rolRescatista" value="2" required>
+          <label class="form-check-label" for="rolRescatista">Quiero dar en adopción</label>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-verde w-100 py-3 auth-btn"><i

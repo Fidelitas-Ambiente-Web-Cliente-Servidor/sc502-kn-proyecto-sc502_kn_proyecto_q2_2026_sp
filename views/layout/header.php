@@ -40,10 +40,12 @@
             </li>
             <!-- proteccion del menu, solo el usuario no logueado -->
           <?php else: ?>
-            <li class="nav-item" id="nav-dashboard">
-              <a class="nav-link" href="index.php?action=rescatista"><i class="fa-solid fa-gauge-high"></i> Panel
-                Rescatista</a>
-            </li>
+            <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
+              <li class="nav-item" id="nav-dashboard">
+                <a class="nav-link" href="index.php?action=rescatista"><i class="fa-solid fa-gauge-high"></i> Panel
+                  Rescatista</a>
+              </li>
+            <?php endif; ?>
           <?php endif; ?>
           <li class="nav-item ms-lg-3" id="nav-adopt-btn">
             <a class="btn btn-verde" href="index.php?action=catalogo">Adoptar Ahora</a>
@@ -58,10 +60,11 @@
                 <span><?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
-                <li><a class="dropdown-item" href="index.php?action=rescatista"><i
-                      class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text me-2"></i> Solicitudes</a>
-                </li>
+                <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
+                  <li><a class="dropdown-item" href="index.php?action=rescatista"><i class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>
+                  <li><a class="dropdown-item" href="index.php?action=rescatista&tab=solicitudes"><i class="fa-solid fa-envelope-open-text me-2"></i> Solicitudes Recibidas</a></li>
+                <?php endif; ?>
+                <li><a class="dropdown-item" href="index.php?action=perfil"><i class="fa-solid fa-heart me-2 text-verde"></i> Mis Solicitudes</a></li>
                 <li><a class="dropdown-item" href="index.php?action=perfil"><i class="fa-solid fa-user-pen me-2"></i> Mi
                     Perfil</a></li>
                 <li>

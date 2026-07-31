@@ -18,7 +18,6 @@ class MascotaController
             $id = $_GET['id'];
             $mascotaModel = new Mascota();
             $mascota = $mascotaModel->getById($id);
-            $extra_js = "adopcion.js";
 
             if ($mascota) {
                 require_once 'views/mascota.php';

@@ -5,9 +5,13 @@ class UsuarioController
 {
     public function login()
     {
-        // si esta logueado, redirigir al panel
+        // si esta logueado, redirigir segun su rol
         if (isset($_SESSION['usuario_id'])) {
-            header("Location: index.php?action=rescatista");
+            if ($_SESSION['usuario_rol'] == 2) {
+                header("Location: index.php?action=rescatista");
+            } else {
+                header("Location: index.php?action=catalogo");
+            }
             exit();
         }
         $extra_js = "auth.js";
@@ -29,8 +33,12 @@ class UsuarioController
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_rol'] = $usuario['rol_id'];
-                // redirigir al panel
-                header("Location: index.php?action=rescatista");
+                // redirigir segun el rol
+                if ($usuario['rol_id'] == 2) {
+                    header("Location: index.php?action=rescatista");
+                } else {
+                    header("Location: index.php?action=catalogo");
+                }
                 exit();
             } else {
                 header("Location: index.php?action=login&error=1");
@@ -42,9 +50,13 @@ class UsuarioController
     //mostrar formulario de registro
     public function registrarse()
     {
-        // si esta logueado, redirigir al panel
+        // si esta logueado, redirigir segun su rol
         if (isset($_SESSION['usuario_id'])) {
-            header("Location: index.php?action=rescatista");
+            if ($_SESSION['usuario_rol'] == 2) {
+                header("Location: index.php?action=rescatista");
+            } else {
+                header("Location: index.php?action=catalogo");
+            }
             exit();
         }
         $extra_js = "auth.js";
@@ -58,7 +70,7 @@ class UsuarioController
             $usuarioModel = new Usuario();
 
             $datos = [
-                'rol_id' => 2, // rol de rescatista por defecto en la db
+                'rol_id' => isset($_POST['rol_id']) ? $_POST['rol_id'] : 3, // dinamico desde form
                 'nombre' => $_POST['nombre'],
                 'apellido' => $_POST['apellido'],
                 'correo' => $_POST['correo'],
@@ -92,11 +104,14 @@ class UsuarioController
             exit();
         }
 
-        //trae las mascotas del usuario
+        //trae las mascotas del usuario, si es rescatista
         require_once 'models/Mascota.php';
         $mascotaModel = new Mascota();
         $mascotas = $mascotaModel->getByRescatista($_SESSION['usuario_id']);
-
+        // trae las solicitudes
+        require_once 'models/Solicitud.php';
+        $solicitudModel = new Solicitud();
+        $solicitudes = $solicitudModel->getByRescatista($_SESSION['usuario_id']);
         $extra_js = "rescatista.js";
         require_once 'views/rescatista.php';
     }
@@ -104,19 +119,24 @@ class UsuarioController
     // vista de perfil
     public function perfil()
     {
-        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
+        if (!isset($_SESSION['usuario_id'])) {
             header("Location: index.php?action=login");
             exit();
         }
         $usuarioModel = new Usuario();
         $usuario = $usuarioModel->getById($_SESSION['usuario_id']);
+        //trae las solicitudes del adoptante
+        require_once 'models/Solicitud.php';
+        $solicitudModel = new Solicitud();
+        $solicitudes = $solicitudModel->getByAdoptanteCorreo($usuario['correo']);
+
         require_once 'views/perfil.php';
     }
 
     // actualizacion de perfil
     public function actualizarPerfil()
     {
-        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
+        if (!isset($_SESSION['usuario_id'])) {
             header("Location: index.php?action=login");
             exit();
         }

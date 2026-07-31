@@ -61,7 +61,7 @@ include 'layout/header.php';
 
     <div class="text-center mt-4">
       <p class="small text-secondary mb-0">¿Aún no tienes cuenta? <a href="index.php?action=registrarse"
-          class="auth-link">Regístrate como rescatista</a></p>
+          class="auth-link">¡Regístrate!</a></p>
     </div>
   </div>
 </main>

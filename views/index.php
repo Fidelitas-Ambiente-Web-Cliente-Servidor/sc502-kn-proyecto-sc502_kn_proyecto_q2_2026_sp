@@ -72,7 +72,7 @@ include 'layout/header.php';
               <i class="fa-solid fa-file-invoice"></i>
             </div>
             <h4 class="fw-bold h5">2. Conoce su Historia</h4>
-            <p class="text-muted small mb-0">Lee sobre su pasado, necesidades mÃ©dicas y carÃ¡cter en su expediente
+            <p class="text-muted small mb-0">Lee sobre su pasado, necesidades médicas y carácter en su expediente
               detallado. Ponte en contacto con su rescatista de inmediato.</p>
           </div>
         </div>
@@ -98,7 +98,7 @@ include 'layout/header.php';
       <div class="d-flex flex-wrap justify-content-between align-items-end mb-5">
         <div>
           <h2 class="fw-bold mb-2">Conoce a nuestros residentes</h2>
-          <p class="text-secondary mb-0">PequeÃ±os corazones esperando una oportunidad.</p>
+          <p class="text-secondary mb-0">Pequeños corazones esperando una oportunidad.</p>
         </div>
         <a href="index.php?action=catalogo" class="btn btn-outline-verde mt-3 mt-md-0">Ver catalogo <i
             class="fa-solid fa-arrow-right ms-1"></i></a>
@@ -106,32 +106,36 @@ include 'layout/header.php';
 
       <div class="row g-4">
         <?php foreach ($mascotas as $mascota): ?>
-        <div class="col-lg-4 col-md-6">
-          <div class="mascota-card">
-            <div class="mascota-img-container">
-              <?php if($mascota['estado'] == 'Urgente'): ?>
-              <span class="mascota-badge bg-warning text-dark">Urgente</span>
-              <?php else: ?>
-              <span class="mascota-badge mascota-badge-verde">Nuevo</span>
-              <?php endif; ?>
-              <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/300') ?>" alt="<?= htmlspecialchars($mascota['nombre']) ?>" class="mascota-img">
-              <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            </div>
-            <div class="mascota-card-body">
-              <h4 class="fw-bold h5 mb-2"><?= htmlspecialchars($mascota['nombre']) ?></h4>
-              <div class="mascota-info-row">
-                <span><i class="fa-solid <?= $mascota['especie_id'] == 2 ? 'fa-cat' : 'fa-dog' ?> me-1"></i> <?= htmlspecialchars($mascota['edad']) ?> meses</span>
-                <span>&bull;</span>
-                <span><?= htmlspecialchars($mascota['tamano']) ?></span>
+          <div class="col-lg-4 col-md-6">
+            <div class="mascota-card">
+              <div class="mascota-img-container">
+                <?php if ($mascota['estado'] == 'Urgente'): ?>
+                  <span class="mascota-badge bg-warning text-dark">Urgente</span>
+                <?php else: ?>
+                  <span class="mascota-badge mascota-badge-verde">Nuevo</span>
+                <?php endif; ?>
+                <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/300') ?>"
+                  alt="<?= htmlspecialchars($mascota['nombre']) ?>" class="mascota-img">
+                <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
               </div>
-              <p class="text-muted small mb-3"><?= htmlspecialchars(substr($mascota['historia'], 0, 80)) ?>...</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="mascota-energia-tag <?= $mascota['energia_id'] == 1 ? 'energia-baja' : '' ?>"><?= htmlspecialchars($mascota['energia']) ?></span>
-                <a href="index.php?action=mascota&id=<?= $mascota['id'] ?>" class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
+              <div class="mascota-card-body">
+                <h4 class="fw-bold h5 mb-2"><?= htmlspecialchars($mascota['nombre']) ?></h4>
+                <div class="mascota-info-row">
+                  <span><i class="fa-solid <?= $mascota['especie_id'] == 2 ? 'fa-cat' : 'fa-dog' ?> me-1"></i>
+                    <?= htmlspecialchars($mascota['edad']) ?> meses</span>
+                  <span>&bull;</span>
+                  <span><?= htmlspecialchars($mascota['tamano']) ?></span>
+                </div>
+                <p class="text-muted small mb-3"><?= htmlspecialchars(substr($mascota['historia'], 0, 80)) ?>...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span
+                    class="mascota-energia-tag <?= $mascota['energia_id'] == 1 ? 'energia-baja' : '' ?>"><?= htmlspecialchars($mascota['energia']) ?></span>
+                  <a href="index.php?action=mascota&id=<?= $mascota['id'] ?>"
+                    class="btn btn-sm btn-outline-verde px-3 py-1">Ver Mascota</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <?php endforeach; ?>
   </section>
 
