@@ -12,6 +12,7 @@ include 'layout/header.php';
       <p class="text-secondary small">Ingresa tus datos para administrar tus mascotas rescatadas.</p>
     </div>
 
+    <!-- control de errores -->
     <?php if (isset($_GET['error'])): ?>
       <div class="alert alert-danger text-center small fw-semibold">Correo o contraseña incorrectos.</div>
     <?php endif; ?>
@@ -25,8 +26,8 @@ include 'layout/header.php';
         <div class="input-group">
           <span class="input-group-text bg-light border-2 border-end-0 input-left-radius"><i
               class="fa-regular fa-envelope text-muted"></i></span>
-          <input type="email" name="correo" class="form-control border-2 border-start-0 input-right-radius" id="loginEmail"
-            placeholder="correo@refugio.com" required value="elena@huellasfelices.com">
+          <input type="email" name="correo" class="form-control border-2 border-start-0 input-right-radius"
+            id="loginEmail" placeholder="correo@refugio.com" required value="elena@huellasfelices.com">
           <div class="invalid-feedback">Ingresa tu correo electrónico registrado.</div>
         </div>
       </div>
@@ -39,8 +40,8 @@ include 'layout/header.php';
         <div class="input-group">
           <span class="input-group-text bg-light border-2 border-end-0 input-left-radius"><i
               class="fa-solid fa-lock text-muted"></i></span>
-          <input type="password" name="contrasena" class="form-control border-2 border-start-0 input-right-radius" id="loginPassword"
-            placeholder="••••••••••" required value="123456">
+          <input type="password" name="contrasena" class="form-control border-2 border-start-0 input-right-radius"
+            id="loginPassword" placeholder="••••••••••" required value="123456">
           <div class="invalid-feedback">Ingresa tu contraseña de rescatista.</div>
         </div>
       </div>
