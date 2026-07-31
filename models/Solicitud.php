@@ -101,5 +101,30 @@ class Solicitud
 
         return $stmt->fetchAll();
     }
+
+    // obtener solicitud por id
+    public function getById($id)
+    {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    // rechazar automaticamente las demas solicitudes
+    public function rechazarOtrasSolicitudes($mascota_id, $solicitud_id_aprobada)
+    {
+        $query = "UPDATE " . $this->table_name . " 
+                  SET estado = 'Rechazada' 
+                  WHERE mascota_id = :mascota_id 
+                  AND id != :solicitud_id_aprobada 
+                  AND estado = 'Pendiente'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":mascota_id", $mascota_id);
+        $stmt->bindParam(":solicitud_id_aprobada", $solicitud_id_aprobada);
+        return $stmt->execute();
+    }
 }
 ?>

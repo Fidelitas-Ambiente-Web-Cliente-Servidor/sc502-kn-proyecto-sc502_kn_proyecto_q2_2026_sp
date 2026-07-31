@@ -64,6 +64,20 @@ class SolicitudController
 
             //veridicacion de usuario
             if ($solicitudModel->updateEstado($solicitud_id, $estado, $_SESSION['usuario_id'])) {
+                //logica de aprobacion
+                if ($estado === 'Aprobada') {
+                    $solicitud = $solicitudModel->getById($solicitud_id);
+                    if ($solicitud) {
+                        require_once 'models/Mascota.php';
+                        $mascotaModel = new Mascota();
+                        //pasar mascota a adoptada
+                        $mascotaModel->cambiarEstado($solicitud['mascota_id'], 'Adoptado');
+                        //rechazar a los demas
+                        $solicitudModel->rechazarOtrasSolicitudes($solicitud['mascota_id'], $solicitud_id);
+                    }
+                }
+
+                //redirigir al rescatista con mensaje de exito
                 header("Location: index.php?action=rescatista&tab=solicitudes&success=estado_actualizado");
                 exit();
             } else {

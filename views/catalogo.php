@@ -1,5 +1,5 @@
 <?php
-$page_title = "Huellas Felices - CatÃ¡logo";
+$page_title = "Huellas Felices - Catalogo";
 $extra_css = "index.css";
 include 'layout/header.php';
 ?>
@@ -59,46 +59,61 @@ include 'layout/header.php';
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
         <?php foreach ($mascotas as $mascota): ?>
-        <div class="col mascota-item" data-especie="<?= htmlspecialchars(strtolower($mascota['nombre_especie'] ?? '')) ?>" data-estado="<?= htmlspecialchars(strtolower($mascota['estado'] ?? '')) ?>">
-          <div class="mascota-card">
-            <div class="mascota-img-container">
-              <?php if($mascota['estado'] == 'Urgente'): ?>
-              <span class="mascota-badge bg-warning text-dark">Urgente</span>
-              <?php else: ?>
-              <span class="mascota-badge mascota-badge-verde">Nuevo</span>
-              <?php endif; ?>
-              <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/300') ?>" alt="<?= htmlspecialchars($mascota['nombre']) ?>" class="mascota-img">
-              <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            </div>
-            <div class="mascota-card-body">
-              <h4 class="fw-bold h5 mb-2"><?= htmlspecialchars($mascota['nombre']) ?></h4>
-              <div class="mascota-info-row">
-                <span><i class="fa-solid fa-calendar me-1"></i> <?= htmlspecialchars($mascota['edad']) ?> meses</span>
-                <span>&bull;</span>
-                <span><i class="fa-solid fa-weight-hanging me-1"></i> <?= htmlspecialchars($mascota['tamano']) ?></span>
+          <div class="col mascota-item"
+            data-especie="<?= htmlspecialchars(strtolower($mascota['nombre_especie'] ?? '')) ?>"
+            data-estado="<?= htmlspecialchars(strtolower($mascota['estado'] ?? '')) ?>">
+            <div class="mascota-card">
+              <div class="mascota-img-container">
+                <?php if ($mascota['estado'] == 'Urgente'): ?>
+                  <span class="mascota-badge bg-warning text-dark">Urgente</span>
+                <?php else: ?>
+                  <span class="mascota-badge mascota-badge-verde">Nuevo</span>
+                <?php endif; ?>
+                <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/300') ?>"
+                  alt="<?= htmlspecialchars($mascota['nombre']) ?>" class="mascota-img">
+                <button class="like-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
               </div>
-              <div class="d-flex justify-content-between align-items-center mt-3">
-                <span class="mascota-energia-tag <?= $mascota['energia_id'] == 1 ? 'energia-baja' : '' ?>"><?= htmlspecialchars($mascota['energia']) ?></span>
-                <a href="index.php?action=mascota&id=<?= $mascota['id'] ?>" class="btn btn-sm btn-outline-verde px-3 py-1">Conocer</a>
+              <div class="mascota-card-body">
+                <h4 class="fw-bold h5 mb-2"><?= htmlspecialchars($mascota['nombre']) ?></h4>
+                <div class="mascota-info-row">
+                  <span><i class="fa-solid fa-calendar me-1"></i> <?= htmlspecialchars($mascota['edad']) ?> meses</span>
+                  <span>&bull;</span>
+                  <span><i class="fa-solid fa-weight-hanging me-1"></i> <?= htmlspecialchars($mascota['tamano']) ?></span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span
+                    class="mascota-energia-tag <?= $mascota['energia_id'] == 1 ? 'energia-baja' : '' ?>"><?= htmlspecialchars($mascota['energia']) ?></span>
+                  <a href="index.php?action=mascota&id=<?= $mascota['id'] ?>"
+                    class="btn btn-sm btn-outline-verde px-3 py-1">Conocer</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <?php endforeach; ?>
       </div>
 
       <!-- Paginador del catalogo -->
-        <nav class="d-flex justify-content-center mt-5">
-          <div class="d-flex gap-2">
-            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
-            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
-            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">3</button>
-            <button class="btn btn-link rounded-circle d-flex align-items-center justify-content-center fw-semibold text-secondary text-decoration-none bg-transparent border-0" disabled>...</button>
-            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">8</button>
-            <button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-right"></i></button>
-          </div>
-        </nav>
+      <nav class="d-flex justify-content-center mt-5">
+        <div class="d-flex gap-2">
+          <button
+            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
+              class="fa-solid fa-chevron-left"></i></button>
+          <button
+            class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
+          <button
+            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
+          <button
+            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">3</button>
+          <button
+            class="btn btn-link rounded-circle d-flex align-items-center justify-content-center fw-semibold text-secondary text-decoration-none bg-transparent border-0"
+            disabled>...</button>
+          <button
+            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">8</button>
+          <button
+            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
+              class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </nav>
 
     </section>
 

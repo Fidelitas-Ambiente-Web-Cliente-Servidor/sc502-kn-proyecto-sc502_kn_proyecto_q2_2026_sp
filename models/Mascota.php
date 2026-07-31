@@ -25,6 +25,7 @@ class Mascota
                   LEFT JOIN razas r ON m.raza_id = r.id
                   LEFT JOIN tamanos t ON m.tamano_id = t.id
                   LEFT JOIN niveles_energia n ON m.energia_id = n.id
+                  WHERE m.estado != 'Adoptado'
                   ORDER BY m.fecha_publicacion DESC";
 
         $stmt = $this->conn->prepare($query);
@@ -133,6 +134,17 @@ class Mascota
         return $stmt->execute();
     }
 
+    // cambiar estado de mascota
+    public function cambiarEstado($id, $estado)
+    {
+        $query = "UPDATE " . $this->table_name . " SET estado = :estado WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        //bindparam lo que hace es evitar inyeccion sql para que no puedan alterar la consulta
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
+
     // eliminar mascota
     public function delete($id, $usuario_id)
     {
@@ -144,22 +156,26 @@ class Mascota
     }
 
     // metodos auxiliares para los selects
-    public function getEspecies() {
+    public function getEspecies()
+    {
         $stmt = $this->conn->query("SELECT * FROM especies ORDER BY nombre_especie");
         return $stmt->fetchAll();
     }
 
-    public function getRazas() {
+    public function getRazas()
+    {
         $stmt = $this->conn->query("SELECT * FROM razas ORDER BY nombre_raza");
         return $stmt->fetchAll();
     }
 
-    public function getTamanos() {
+    public function getTamanos()
+    {
         $stmt = $this->conn->query("SELECT * FROM tamanos ORDER BY id");
         return $stmt->fetchAll();
     }
 
-    public function getEnergias() {
+    public function getEnergias()
+    {
         $stmt = $this->conn->query("SELECT * FROM niveles_energia ORDER BY id");
         return $stmt->fetchAll();
     }
