@@ -16,7 +16,12 @@ $rutas = [
     'logout' => ['controller' => 'UsuarioController', 'method' => 'logout'],
     'rescatista' => ['controller' => 'UsuarioController', 'method' => 'rescatista'],
     'perfil' => ['controller' => 'UsuarioController', 'method' => 'perfil'],
-    'perfil_post' => ['controller' => 'UsuarioController', 'method' => 'actualizarPerfil']
+    'perfil_post' => ['controller' => 'UsuarioController', 'method' => 'actualizarPerfil'],
+    'mascota_crear' => ['controller' => 'MascotaController', 'method' => 'crearForm'],
+    'mascota_crear_post' => ['controller' => 'MascotaController', 'method' => 'crearPost'],
+    'mascota_editar' => ['controller' => 'MascotaController', 'method' => 'editarForm'],
+    'mascota_editar_post' => ['controller' => 'MascotaController', 'method' => 'editarPost'],
+    'mascota_eliminar' => ['controller' => 'MascotaController', 'method' => 'eliminar']
 ];
 
 if (array_key_exists($action, $rutas)) {

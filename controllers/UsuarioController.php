@@ -91,6 +91,12 @@ class UsuarioController
             header("Location: index.php?action=login");
             exit();
         }
+
+        //trae las mascotas del usuario
+        require_once 'models/Mascota.php';
+        $mascotaModel = new Mascota();
+        $mascotas = $mascotaModel->getByRescatista($_SESSION['usuario_id']);
+
         $extra_js = "rescatista.js";
         require_once 'views/rescatista.php';
     }
