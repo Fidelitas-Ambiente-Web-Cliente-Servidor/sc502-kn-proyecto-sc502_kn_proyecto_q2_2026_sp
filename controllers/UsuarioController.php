@@ -85,7 +85,6 @@ class UsuarioController
     //proteccion del seccionado, solo el usuario que esta logueado
     public function rescatista()
     {
-        if (!isset($_SESSION['usuario_id'])) {
         if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
             header("Location: index.php?action=login");
             exit();
