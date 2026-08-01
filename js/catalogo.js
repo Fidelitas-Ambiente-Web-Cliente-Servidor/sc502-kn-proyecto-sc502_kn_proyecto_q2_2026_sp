@@ -68,8 +68,8 @@ $(document).ready(function () {
         $container.append(btnNext);
     }
 
-    //aplicar los filtros al catalogo
-    function aplicarFiltros() {
+    // aplicar los filtros al catalogo mediante ajax
+    async function aplicarFiltros() {
         let valorBusqueda = '';
         let inputBuscarCat = $('input[placeholder="Buscar por nombre, raza..."]');
         if (inputBuscarCat.length) {
@@ -87,6 +87,7 @@ $(document).ready(function () {
             estadosSeleccionados.push($(this).val());
         });
 
+        /* forma anterior sincrona sin ajax, filtrado en cliente en el dom sin llamar al servidor
         $('.mascota-item').each(function () {
             let $item = $(this);
             let textoTarjeta = $item.text().toLowerCase();
@@ -104,6 +105,36 @@ $(document).ready(function () {
                 $item.hide();
             }
         });
+        */
+
+        //metodo ajax asincrono consulta al backend, db, que mascotas coinciden y actualiza la vista
+        try {
+            //arma los parametros para la peticion
+            let params = new URLSearchParams({
+                busqueda: valorBusqueda,
+                especies: especiesSeleccionadas.join(','),
+                estados: estadosSeleccionados.join(',')
+            });
+            //peticion ajax
+            let res = await fetch('index.php?action=api_mascotas_filtradas&' + params.toString());
+            //convierte la respuesta en json
+            let data = await res.json();
+            //crea un array con los ids de las mascotas coincidentes
+            let idsCoincidentes = data.map(item => Number(item.id));
+            //itera sobre todas las mascotas
+            $('.mascota-item').each(function () {
+                let idItem = Number($(this).data('id'));
+                //muestra la mascota si su id esta en el array de coincidentes, si no la oculta
+                if (idsCoincidentes.includes(idItem)) {
+                    $(this).removeClass('filtered-out');
+                } else {
+                    $(this).addClass('filtered-out');
+                    $(this).hide();
+                }
+            });
+        } catch (err) {
+            console.error('error en filtrado ajax del catalogo:', err);
+        }
 
         paginaActual = 1;
         aplicarPaginacion();

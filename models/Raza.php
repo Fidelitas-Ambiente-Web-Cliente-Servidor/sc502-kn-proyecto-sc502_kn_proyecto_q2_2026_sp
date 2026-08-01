@@ -23,16 +23,26 @@ class Raza
         return $stmt->fetchAll();
     }
 
+    // obtener razas por especie para utilizarla en ajax
+    public function getByEspecie($especie_id)
+    {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE especie_id = :especie_id ORDER BY nombre_raza ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":especie_id", $especie_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // crear una nueva raza
     public function create($nombre_raza, $especie_id)
     {
         $query = "INSERT INTO " . $this->table_name . " (nombre_raza, especie_id) VALUES (:nombre_raza, :especie_id)";
         $stmt = $this->conn->prepare($query);
-        
+
         $nombre_raza = htmlspecialchars(strip_tags($nombre_raza));
         $stmt->bindParam(":nombre_raza", $nombre_raza);
         $stmt->bindParam(":especie_id", $especie_id);
-        
+
         if ($stmt->execute()) {
             return true;
         }
@@ -52,13 +62,13 @@ class Raza
     {
         $query = "UPDATE " . $this->table_name . " SET nombre_raza = :nombre_raza, especie_id = :especie_id WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-        
+
         $nombre_raza = htmlspecialchars(strip_tags($nombre_raza));
-        
+
         $stmt->bindParam(":nombre_raza", $nombre_raza);
         $stmt->bindParam(":especie_id", $especie_id);
         $stmt->bindParam(":id", $id);
-        
+
         if ($stmt->execute()) {
             return true;
         }
@@ -70,7 +80,7 @@ class Raza
         $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);
-        
+
         if ($stmt->execute()) {
             return true;
         }

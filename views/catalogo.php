@@ -60,6 +60,7 @@ include 'layout/header.php';
 
         <?php foreach ($mascotas as $mascota): ?>
           <div class="col mascota-item"
+            data-id="<?= $mascota['id'] ?>"
             data-especie="<?= htmlspecialchars(strtolower($mascota['nombre_especie'] ?? '')) ?>"
             data-estado="<?= htmlspecialchars(strtolower($mascota['estado'] ?? '')) ?>">
             <div class="mascota-card">

@@ -9,7 +9,7 @@ include 'layout/header.php';
       <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
         <div class="card-header bg-navy text-white p-4">
           <h2 class="h4 mb-0 fw-bold">
-            <i class="fa-solid <?= $mascota ? 'fa-pen-to-square' : 'fa-paw' ?> me-2"></i> 
+            <i class="fa-solid <?= $mascota ? 'fa-pen-to-square' : 'fa-paw' ?> me-2"></i>
             <?= $mascota ? 'Editar Mascota' : 'Agregar Nueva Mascota' ?>
           </h2>
         </div>
@@ -23,17 +23,19 @@ include 'layout/header.php';
           <?php endif; ?>
 
           <form action="index.php?action=<?= $accion_form ?>" method="POST" class="needs-validation" novalidate>
-            
+
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="nombre" class="form-label fw-semibold">Nombre de la Mascota *</label>
-                <input type="text" class="form-control form-control-lg border-light-subtle" id="nombre" name="nombre" value="<?= htmlspecialchars($mascota['nombre'] ?? '') ?>" required>
+                <input type="text" class="form-control form-control-lg border-light-subtle" id="nombre" name="nombre"
+                  value="<?= htmlspecialchars($mascota['nombre'] ?? '') ?>" required>
                 <div class="invalid-feedback">Por favor ingresa el nombre de la mascota.</div>
               </div>
-              
+
               <div class="col-md-6">
                 <label for="edad" class="form-label fw-semibold">Edad (años) *</label>
-                <input type="number" class="form-control form-control-lg border-light-subtle" id="edad" name="edad" min="0" max="30" value="<?= htmlspecialchars($mascota['edad'] ?? '') ?>" required>
+                <input type="number" class="form-control form-control-lg border-light-subtle" id="edad" name="edad"
+                  min="0" max="30" value="<?= htmlspecialchars($mascota['edad'] ?? '') ?>" required>
                 <div class="invalid-feedback">Por favor ingresa una edad válida.</div>
               </div>
             </div>
@@ -41,7 +43,8 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="especie_id" class="form-label fw-semibold">Especie *</label>
-                <select class="form-select form-select-lg border-light-subtle" id="especie_id" name="especie_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="especie_id" name="especie_id"
+                  required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona una especie</option>
                   <?php foreach ($especies as $especie): ?>
                     <option value="<?= $especie['id'] ?>" <?= ($mascota && $mascota['especie_id'] == $especie['id']) ? 'selected' : '' ?>>
@@ -82,7 +85,8 @@ include 'layout/header.php';
 
               <div class="col-md-6">
                 <label for="energia_id" class="form-label fw-semibold">Nivel de Energía *</label>
-                <select class="form-select form-select-lg border-light-subtle" id="energia_id" name="energia_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="energia_id" name="energia_id"
+                  required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona el nivel de energía</option>
                   <?php foreach ($energias as $energia): ?>
                     <option value="<?= $energia['id'] ?>" <?= ($mascota && $mascota['energia_id'] == $energia['id']) ? 'selected' : '' ?>>
@@ -97,7 +101,9 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-12">
                 <label for="foto_path" class="form-label fw-semibold">URL de Fotografía *</label>
-                <input type="url" class="form-control form-control-lg border-light-subtle" id="foto_path" name="foto_path" placeholder="https://ejemplo.com/imagen.jpg" value="<?= htmlspecialchars($mascota['foto_path'] ?? '') ?>" required>
+                <input type="url" class="form-control form-control-lg border-light-subtle" id="foto_path"
+                  name="foto_path" placeholder="https://ejemplo.com/imagen.jpg"
+                  value="<?= htmlspecialchars($mascota['foto_path'] ?? '') ?>" required>
                 <div class="form-text">Pega un enlace directo a la imagen de la mascota.</div>
                 <div class="invalid-feedback">Por favor ingresa una URL válida.</div>
               </div>
@@ -105,15 +111,19 @@ include 'layout/header.php';
 
             <div class="mb-4">
               <label for="historia" class="form-label fw-semibold">Historia / Descripción</label>
-              <textarea class="form-control form-control-lg border-light-subtle" id="historia" name="historia" rows="4" placeholder="Cuéntanos un poco sobre la mascota..."><?= htmlspecialchars($mascota['historia'] ?? '') ?></textarea>
+              <textarea class="form-control form-control-lg border-light-subtle" id="historia" name="historia" rows="4"
+                placeholder="Cuéntanos un poco sobre la mascota..."><?= htmlspecialchars($mascota['historia'] ?? '') ?></textarea>
             </div>
 
             <div class="mb-5">
               <label for="estado" class="form-label fw-semibold">Estado de la Mascota *</label>
               <select class="form-select form-select-lg border-light-subtle" id="estado" name="estado" required>
-                <option value="Disponible" <?= ($mascota && $mascota['estado'] == 'Disponible') ? 'selected' : '' ?>>Disponible</option>
-                <option value="Urgente" <?= ($mascota && $mascota['estado'] == 'Urgente') ? 'selected' : '' ?>>Urgente</option>
-                <option value="Adoptado" <?= ($mascota && $mascota['estado'] == 'Adoptado') ? 'selected' : '' ?>>Adoptado</option>
+                <option value="Disponible" <?= ($mascota && $mascota['estado'] == 'Disponible') ? 'selected' : '' ?>>
+                  Disponible</option>
+                <option value="Urgente" <?= ($mascota && $mascota['estado'] == 'Urgente') ? 'selected' : '' ?>>Urgente
+                </option>
+                <option value="Adoptado" <?= ($mascota && $mascota['estado'] == 'Adoptado') ? 'selected' : '' ?>>Adoptado
+                </option>
               </select>
               <div class="invalid-feedback">Selecciona el estado.</div>
             </div>
@@ -126,7 +136,7 @@ include 'layout/header.php';
                 <i class="fa-solid fa-save me-2"></i> <?= $mascota ? 'Guardar Cambios' : 'Registrar Mascota' ?>
               </button>
             </div>
-            
+
           </form>
 
         </div>
@@ -134,5 +144,35 @@ include 'layout/header.php';
     </div>
   </div>
 </main>
+
+<!--metodo ajax para actualizar la lista de razas dinamicamente sin recargar pagina -->
+<!--antes el backend cargaba todas las razas en el select al cargar la vista -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const selectEspecie = document.getElementById('especie_id');
+    const selectRaza = document.getElementById('raza_id');
+
+    if (selectEspecie && selectRaza) {
+      selectEspecie.addEventListener('change', async function () {
+        const especieId = this.value;
+        if (!especieId) return;
+
+        //ajax al backend para obtener las razas filtradas
+        try {
+          const res = await fetch(`index.php?action=api_razas_por_especie&especie_id=${especieId}`);
+          const razas = await res.json();
+
+          //limpia opciones anteriores y llena dinamicamente
+          selectRaza.innerHTML = '<option value="" disabled selected>Selecciona una raza</option>';
+          razas.forEach(r => {
+            selectRaza.innerHTML += `<option value="${r.id}">${r.nombre_raza}</option>`;
+          });
+        } catch (err) {
+          console.error('error al cargar razas por ajax:', err);
+        }
+      });
+    }
+  });
+</script>
 
 <?php include 'layout/footer.php'; ?>

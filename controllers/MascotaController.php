@@ -1,5 +1,6 @@
 <?php
 require_once 'models/Mascota.php';
+require_once 'models/Raza.php';
 
 class MascotaController
 {
@@ -169,6 +170,22 @@ class MascotaController
             }
             exit();
         }
+    }
+
+    //endpoint ajax retorna razas de una especie en formato json
+    public function apiRazasPorEspecie()
+    {
+        //define el encabezado para enviar datos en formato json
+        header('Content-Type: application/json; charset=utf-8');
+        //obtiene el id de la especie enviada desde el front
+        $especie_id = isset($_GET['especie_id']) ? intval($_GET['especie_id']) : 0;
+        //crea instancia del modelo
+        $razaModel = new Raza();
+        //obtiene las razas de la especie
+        $razas = $razaModel->getByEspecie($especie_id);
+        //convierte el array de razas a json y lo devuelve
+        echo json_encode($razas);
+        exit();
     }
 }
 ?>

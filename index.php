@@ -39,7 +39,12 @@ $rutas = [
     'admin_crear_raza' => ['controller' => 'AdminController', 'method' => 'crearRaza'],
     'admin_editar_raza' => ['controller' => 'AdminController', 'method' => 'editarRaza'],
     'admin_editar_raza_post' => ['controller' => 'AdminController', 'method' => 'editarRazaPost'],
-    'admin_eliminar_raza' => ['controller' => 'AdminController', 'method' => 'eliminarRaza']
+    'admin_eliminar_raza' => ['controller' => 'AdminController', 'method' => 'eliminarRaza'],
+    // endpoints ajax para peticiones asincronas del frontend
+    'api_razas_por_especie' => ['controller' => 'MascotaController', 'method' => 'apiRazasPorEspecie'],
+    'api_verificar_correo' => ['controller' => 'UsuarioController', 'method' => 'apiVerificarCorreo'],
+    'api_solicitud_estado' => ['controller' => 'SolicitudController', 'method' => 'apiActualizarEstado'],
+    'api_mascotas_filtradas' => ['controller' => 'HomeController', 'method' => 'apiMascotasFiltradas']
 ];
 
 if (array_key_exists($action, $rutas)) {

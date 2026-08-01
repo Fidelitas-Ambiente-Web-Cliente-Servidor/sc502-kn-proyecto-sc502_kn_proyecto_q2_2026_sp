@@ -13,13 +13,15 @@ include 'layout/header.php';
     </div>
 
     <?php if (isset($_GET['error'])): ?>
-      <div class="alert alert-danger text-center small fw-semibold">Hubo un error al crear la cuenta. Por favor intenta de nuevo.</div>
+      <div class="alert alert-danger text-center small fw-semibold">Hubo un error al crear la cuenta. Por favor intenta de
+        nuevo.</div>
     <?php endif; ?>
 
     <form id="form-registro" action="index.php?action=registro_post" method="POST" class="needs-validation" novalidate>
       <div class="mb-3">
         <label for="regNombre" class="form-label fw-600">Nombre *</label>
-        <input type="text" name="nombre" class="form-control border-2 auth-input" id="regNombre" placeholder="Tu nombre" required>
+        <input type="text" name="nombre" class="form-control border-2 auth-input" id="regNombre" placeholder="Tu nombre"
+          required>
         <div class="invalid-feedback">Por favor ingresa tu nombre completo.</div>
       </div>
 
@@ -32,9 +34,10 @@ include 'layout/header.php';
 
       <div class="mb-3">
         <label for="regEmail" class="form-label fw-600">Correo Electrónico *</label>
-        <input type="email" name="correo" class="form-control border-2 auth-input" id="regEmail" placeholder="correo@ejemplo.com"
-          required>
+        <input type="email" name="correo" class="form-control border-2 auth-input" id="regEmail"
+          placeholder="correo@ejemplo.com" required>
         <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+        <div id="correo-ajax-feedback" class="small mt-1 fw-semibold"></div>
       </div>
 
       <div class="mb-3">
@@ -72,5 +75,45 @@ include 'layout/header.php';
     </div>
   </div>
 </main>
+
+<!--comprueba disponibilidad de correo en vivo en la base de datos por medio de ajax-->
+<!--antes se verificaba al enviar el formulario (post) y recargar pagina-->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const inputEmail = document.getElementById('regEmail');
+    const feedback = document.getElementById('correo-ajax-feedback');
+
+    //se ejecuta cuando el usuario sale del input email
+    if (inputEmail && feedback) {
+      inputEmail.addEventListener('blur', async function () {
+        const correo = this.value.trim();
+
+        //si no hay correo o no es un correo valido, no se hace nada
+        if (!correo || !correo.includes('@')) {
+          feedback.textContent = '';
+          return;
+        }
+
+        try {
+          // peticion ajax al endpoint para revisar correo
+          const res = await fetch(`index.php?action=api_verificar_correo&correo=${encodeURIComponent(correo)}`);
+          const data = await res.json();
+
+          if (data.disponible) {
+            feedback.textContent = 'correo disponible para registro.';
+            feedback.className = 'small mt-1 fw-semibold text-success';
+            inputEmail.classList.remove('is-invalid');
+          } else {
+            feedback.textContent = 'este correo ya esta registrado en la plataforma.';
+            feedback.className = 'small mt-1 fw-semibold text-danger';
+            inputEmail.classList.add('is-invalid');
+          }
+        } catch (err) {
+          console.error('error al checar correo por ajax:', err);
+        }
+      });
+    }
+  });
+</script>
 
 <?php include 'layout/footer.php'; ?>

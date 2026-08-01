@@ -89,5 +89,53 @@ class SolicitudController
             exit();
         }
     }
+
+    //endpoint ajax actualiza el estado de una solicitud en formato json
+    public function apiActualizarEstado()
+    {
+        //se requieren los modelos
+        require_once 'models/Solicitud.php';
+        require_once 'models/Mascota.php';
+
+        //define el encabezado para enviar datos en formato json
+        header('Content-Type: application/json; charset=utf-8');
+        //inicia sesion si no esta iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        //verifica que el usuario sea rescatista
+        if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] != 2) {
+            echo json_encode(['success' => false, 'error' => 'no autorizado']);
+            exit();
+        }
+
+        //datos post
+        $solicitud_id = $_POST['solicitud_id'] ?? 0;
+        $estado = $_POST['estado'] ?? '';
+
+        //estado valido
+        if (!in_array($estado, ['Aprobada', 'Rechazada'])) {
+            echo json_encode(['success' => false, 'error' => 'estado invalido']);
+            exit();
+        }
+
+        $solicitudModel = new Solicitud();
+        if ($solicitudModel->updateEstado($solicitud_id, $estado, $_SESSION['usuario_id'])) {
+            //aprobacion
+            if ($estado === 'Aprobada') {
+                $solicitud = $solicitudModel->getById($solicitud_id);
+                if ($solicitud) {
+                    require_once 'models/Mascota.php';
+                    $mascotaModel = new Mascota();
+                    $mascotaModel->cambiarEstado($solicitud['mascota_id'], 'Adoptado');
+                    $solicitudModel->rechazarOtrasSolicitudes($solicitud['mascota_id'], $solicitud_id);
+                }
+            }
+            echo json_encode(['success' => true, 'id' => $solicitud_id, 'estado' => $estado]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'error en bd']);
+        }
+        exit();
+    }
 }
 ?>

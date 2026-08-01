@@ -30,7 +30,7 @@ class UsuarioController
 
             // verificar si el usuario existe y la contraseña coincide
             if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
-                
+
                 //evitar login si la cuenta esta inactiva
                 if (isset($usuario['estado']) && $usuario['estado'] == 'Inactivo') {
                     header("Location: index.php?action=login&error=inactivo");
@@ -115,7 +115,7 @@ class UsuarioController
         require_once 'models/Mascota.php';
         $mascotaModel = new Mascota();
         $mascotas = $mascotaModel->getByRescatista($_SESSION['usuario_id']);
-        
+
         // metricas del rescatista
         $mascotasAdoptadas = $mascotaModel->countByRescatistaAndEstado($_SESSION['usuario_id'], 'Adoptado');
         $mascotasDisponibles = $mascotaModel->countByRescatistaAndEstado($_SESSION['usuario_id'], 'Disponible');
@@ -176,6 +176,29 @@ class UsuarioController
                 exit();
             }
         }
+    }
+
+    // endpoint ajax si un correo ya esta registrado en la base de datos
+    public function apiVerificarCorreo()
+    {
+        //define el encabezado para enviar datos en formato json
+        header('Content-Type: application/json; charset=utf-8');
+        //obtiene el correo enviado desde el front
+        $correo = isset($_GET['correo']) ? trim($_GET['correo']) : '';
+        if (empty($correo)) {
+            echo json_encode(['disponible' => false, 'mensaje' => 'correo vacio']);
+            exit();
+        }
+        //crea instancia del modelo
+        $usuarioModel = new Usuario();
+        $existe = $usuarioModel->getByCorreo($correo);
+        //devuelve json si eciste el correo o no
+        if ($existe) {
+            echo json_encode(['disponible' => false, 'mensaje' => 'este correo ya esta registrado']);
+        } else {
+            echo json_encode(['disponible' => true, 'mensaje' => 'correo disponible']);
+        }
+        exit();
     }
 }
 ?>
