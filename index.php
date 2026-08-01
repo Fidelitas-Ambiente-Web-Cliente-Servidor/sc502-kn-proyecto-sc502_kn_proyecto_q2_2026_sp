@@ -28,7 +28,13 @@ $rutas = [
     'mascota_eliminar' => ['controller' => 'MascotaController', 'method' => 'eliminar'],
     //solicitudes
     'solicitud_enviar_post' => ['controller' => 'SolicitudController', 'method' => 'enviarPost'],
-    'solicitud_estado' => ['controller' => 'SolicitudController', 'method' => 'actualizarEstado']
+    'solicitud_estado' => ['controller' => 'SolicitudController', 'method' => 'actualizarEstado'],
+    //admin
+    'admin_dashboard' => ['controller' => 'AdminController', 'method' => 'dashboard'],
+    'admin_usuarios' => ['controller' => 'AdminController', 'method' => 'usuarios'],
+    'admin_toggle_usuario' => ['controller' => 'AdminController', 'method' => 'toggleUsuario'],
+    'admin_cambiar_rol' => ['controller' => 'AdminController', 'method' => 'cambiarRol'],
+    'admin_mascotas' => ['controller' => 'AdminController', 'method' => 'mascotas']
 ];
 
 if (array_key_exists($action, $rutas)) {

@@ -14,7 +14,11 @@ include 'layout/header.php';
 
     <!-- control de errores -->
     <?php if (isset($_GET['error'])): ?>
-      <div class="alert alert-danger text-center small fw-semibold">Correo o contraseña incorrectos.</div>
+      <?php if ($_GET['error'] == 'inactivo'): ?>
+        <div class="alert alert-danger text-center small fw-semibold"><i class="fa-solid fa-ban me-1"></i> Tu cuenta ha sido desactivada por un administrador.</div>
+      <?php else: ?>
+        <div class="alert alert-danger text-center small fw-semibold">Correo o contraseña incorrectos.</div>
+      <?php endif; ?>
     <?php endif; ?>
     <?php if (isset($_GET['success'])): ?>
       <div class="alert alert-success text-center small fw-semibold">Registro exitoso. Ahora puedes iniciar sesión.</div>

@@ -121,3 +121,8 @@ CHANGE COLUMN estado_solicitud estado ENUM('Pendiente', 'Aprobada', 'Rechazada')
 CHANGE COLUMN fecha_envio created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN nombre_adoptante VARCHAR(100) NOT NULL AFTER mascota_id,
 ADD COLUMN correo_adoptante VARCHAR(150) NOT NULL AFTER nombre_adoptante;
+
+
+--sprint 9 fase 2 admin 
+ALTER TABLE usuarios ADD COLUMN estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo';
+

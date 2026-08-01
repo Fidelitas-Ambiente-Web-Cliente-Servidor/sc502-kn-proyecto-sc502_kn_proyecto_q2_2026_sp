@@ -126,5 +126,12 @@ class Solicitud
         $stmt->bindParam(":solicitud_id_aprobada", $solicitud_id_aprobada);
         return $stmt->execute();
     }
+
+    // contar solicitudes pendientes para el dashboard de admin
+    public function countPendientes()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE estado = 'Pendiente'");
+        return $stmt->fetch()['total'];
+    }
 }
 ?>

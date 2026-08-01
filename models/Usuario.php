@@ -80,5 +80,50 @@ class Usuario
 
         return $stmt->execute();
     }
+
+    //obtener todos los usuarios 
+    public function getAll()
+    {
+        $query = "SELECT u.*, r.nombre_rol 
+                  FROM " . $this->table_name . " u
+                  LEFT JOIN roles r ON u.rol_id = r.id
+                  ORDER BY u.fecha_registro DESC";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    // alternar estado de cuenta activoo inactivo
+    public function toggleEstado($id)
+    {
+        // primero obtener el estado actual
+        $query = "SELECT estado FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $usuario = $stmt->fetch();
+
+        if ($usuario) {
+            $nuevoEstado = ($usuario['estado'] == 'Activo') ? 'Inactivo' : 'Activo';
+
+            $queryUpdate = "UPDATE " . $this->table_name . " SET estado = :estado WHERE id = :id";
+            $stmtUpdate = $this->conn->prepare($queryUpdate);
+            $stmtUpdate->bindParam(":estado", $nuevoEstado);
+            $stmtUpdate->bindParam(":id", $id);
+            return $stmtUpdate->execute();
+        }
+        return false;
+    }
+
+    // cambiar el rol de un usuario
+    public function cambiarRol($id, $rol_id)
+    {
+        $query = "UPDATE " . $this->table_name . " SET rol_id = :rol_id WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":rol_id", $rol_id);
+        $stmt->bindParam(":id", $id);
+        return $stmt->execute();
+    }
 }
 ?>

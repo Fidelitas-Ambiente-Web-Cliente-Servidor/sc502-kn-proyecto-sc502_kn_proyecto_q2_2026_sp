@@ -40,7 +40,12 @@
             </li>
             <!-- proteccion del menu, solo el usuario no logueado -->
           <?php else: ?>
-            <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
+            <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 1): ?>
+              <li class="nav-item" id="nav-dashboard-admin">
+                <a class="nav-link text-primary fw-bold" href="index.php?action=admin_dashboard"><i class="fa-solid fa-crown"></i> Panel
+                  Admin</a>
+              </li>
+            <?php elseif (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
               <li class="nav-item" id="nav-dashboard">
                 <a class="nav-link" href="index.php?action=rescatista"><i class="fa-solid fa-gauge-high"></i> Panel
                   Rescatista</a>
@@ -60,7 +65,12 @@
                 <span><?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
-                <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
+                <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 1): ?>
+                  <li><a class="dropdown-item" href="index.php?action=admin_dashboard"><i class="fa-solid fa-chart-line me-2"></i> Dashboard Admin</a></li>
+                  <li><a class="dropdown-item" href="index.php?action=admin_usuarios"><i class="fa-solid fa-users me-2"></i> Usuarios</a></li>
+                  <li><a class="dropdown-item" href="index.php?action=admin_mascotas"><i class="fa-solid fa-paw me-2"></i> Todas las Mascotas</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                <?php elseif (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
                   <li><a class="dropdown-item" href="index.php?action=rescatista"><i class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>
                   <li><a class="dropdown-item" href="index.php?action=rescatista&tab=solicitudes"><i class="fa-solid fa-envelope-open-text me-2"></i> Solicitudes Recibidas</a></li>
                 <?php endif; ?>

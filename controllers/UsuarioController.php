@@ -30,6 +30,13 @@ class UsuarioController
 
             // verificar si el usuario existe y la contraseña coincide
             if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
+                
+                //evitar login si la cuenta esta inactiva
+                if (isset($usuario['estado']) && $usuario['estado'] == 'Inactivo') {
+                    header("Location: index.php?action=login&error=inactivo");
+                    exit();
+                }
+
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_rol'] = $usuario['rol_id'];

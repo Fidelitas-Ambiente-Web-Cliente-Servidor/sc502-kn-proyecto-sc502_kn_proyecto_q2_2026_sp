@@ -179,5 +179,39 @@ class Mascota
         $stmt = $this->conn->query("SELECT * FROM niveles_energia ORDER BY id");
         return $stmt->fetchAll();
     }
+
+    // metodos de admin
+    public function getAllAdmin()
+    {
+        $query = "SELECT m.*, 
+                         e.nombre_especie, 
+                         r.nombre_raza, 
+                         t.descripcion as tamano, 
+                         n.descripcion as energia,
+                         u.correo as rescatista_correo
+                  FROM " . $this->table_name . " m
+                  LEFT JOIN especies e ON m.especie_id = e.id
+                  LEFT JOIN razas r ON m.raza_id = r.id
+                  LEFT JOIN tamanos t ON m.tamano_id = t.id
+                  LEFT JOIN niveles_energia n ON m.energia_id = n.id
+                  LEFT JOIN usuarios u ON m.usuario_id = u.id
+                  ORDER BY m.fecha_publicacion DESC";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function countTotal()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) as total FROM " . $this->table_name);
+        return $stmt->fetch()['total'];
+    }
+
+    public function countAdoptadas()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE estado = 'Adoptado'");
+        return $stmt->fetch()['total'];
+    }
 }
 ?>
