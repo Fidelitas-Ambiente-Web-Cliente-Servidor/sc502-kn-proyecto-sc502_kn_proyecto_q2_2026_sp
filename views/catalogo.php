@@ -92,26 +92,9 @@ include 'layout/header.php';
         <?php endforeach; ?>
       </div>
 
-      <!-- Paginador del catalogo -->
+      <!-- paginador del catalogo -->
       <nav class="d-flex justify-content-center mt-5">
-        <div class="d-flex gap-2">
-          <button
-            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
-              class="fa-solid fa-chevron-left"></i></button>
-          <button
-            class="btn rounded-circle d-flex align-items-center justify-content-center btn-pagination active">1</button>
-          <button
-            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">2</button>
-          <button
-            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">3</button>
-          <button
-            class="btn btn-link rounded-circle d-flex align-items-center justify-content-center fw-semibold text-secondary text-decoration-none bg-transparent border-0"
-            disabled>...</button>
-          <button
-            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">8</button>
-          <button
-            class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i
-              class="fa-solid fa-chevron-right"></i></button>
+        <div class="d-flex gap-2" id="pagination-container">
         </div>
       </nav>
 

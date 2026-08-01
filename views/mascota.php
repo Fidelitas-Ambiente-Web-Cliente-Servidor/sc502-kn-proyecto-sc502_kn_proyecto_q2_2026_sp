@@ -17,36 +17,12 @@ include 'layout/header.php';
         <!-- Galeria -->
         <div class="mascota-galeria mb-5">
           <div class="main-photo-container position-relative mb-3">
-            <img src="" alt="Nombre de un perro" class="img-fluid rounded-4 w-100 object-fit-cover mascota-img-main">
-            <span
-              class="badge bg-white text-dark position-absolute bottom-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm fw-semibold">1
-              / 4 fotos</span>
-          </div>
-          <div class="row g-2">
-            <div class="col-3">
-              <img src="" alt="Miniatura 1"
-                class="img-fluid rounded-3 active-thumb w-100 object-fit-cover mascota-img-thumb">
-            </div>
-            <div class="col-3">
-              <img src="" alt="Miniatura 2"
-                class="img-fluid rounded-3 opacity-75 w-100 object-fit-cover mascota-img-thumb">
-            </div>
-            <div class="col-3">
-              <img src="" alt="Miniatura 3"
-                class="img-fluid rounded-3 opacity-75 w-100 object-fit-cover mascota-img-thumb">
-            </div>
-            <div class="col-3 position-relative">
-              <img src="" alt="Miniatura 4"
-                class="img-fluid rounded-3 opacity-75 w-100 object-fit-cover mascota-img-thumb">
-              <div
-                class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center mascota-thumb-overlay">
-                <span class="fw-bold text-dark fs-5">+1</span>
-              </div>
-            </div>
+            <img src="<?= htmlspecialchars($mascota['foto_path'] ?: 'https://via.placeholder.com/600') ?>"
+              alt="<?= htmlspecialchars($mascota['nombre']) ?>"
+              class="img-fluid rounded-4 w-100 object-fit-cover mascota-img-main">
           </div>
         </div>
-
-        <!-- Historia -->
+        <!-- historia -->
         <div class="mascota-historia bg-soft-gray p-4 p-md-5 rounded-4 mb-4">
           <h3 class="fw-bold mb-4 text-dark-navy">Historia de <?= htmlspecialchars($mascota['nombre']) ?></h3>
           <p class="text-secondary mb-4 fs-5 mascota-historia-text">

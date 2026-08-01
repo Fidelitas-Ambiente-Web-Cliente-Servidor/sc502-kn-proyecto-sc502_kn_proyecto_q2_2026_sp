@@ -1,22 +1,81 @@
 $(document).ready(function () {
-    //filtro del catalogo (Búsqueda por texto)
-    let inputBuscarCat = $('input[placeholder="Buscar por nombre, raza..."]');
-    if (inputBuscarCat.length) {
-        inputBuscarCat.on('keyup', function () {
-            let valorBusqueda = $(this).val().toLowerCase();
-            $('.col-md-6.col-lg-4').each(function () {
-                let textoTarjeta = $(this).text().toLowerCase();
-                if (textoTarjeta.indexOf(valorBusqueda) > -1) {
-                    $(this).fadeIn(200);
-                } else {
-                    $(this).fadeOut(200);
-                }
-            });
-        });
+    const ITEMS_POR_PAGINA = 6;
+    let paginaActual = 1;
+
+    function aplicarPaginacion() {
+        let itemsVisibles = $('.mascota-item').not('.filtered-out');
+        let totalItems = itemsVisibles.length;
+        let totalPaginas = Math.ceil(totalItems / ITEMS_POR_PAGINA);
+
+        if (totalPaginas === 0) totalPaginas = 1;
+        if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+
+        //mostrar solo los de la página actual
+        itemsVisibles.hide();
+
+        let inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+        let fin = inicio + ITEMS_POR_PAGINA;
+
+        itemsVisibles.slice(inicio, fin).fadeIn(200);
+
+        renderizarControlesPaginacion(totalPaginas);
     }
 
-    // filtros por especie y estado en catalogo
-    $('.filtro-chk').on('change', function () {
+    function renderizarControlesPaginacion(totalPaginas) {
+        let $container = $('#pagination-container');
+        if (!$container.length) return;
+
+        $container.empty();
+
+        if (totalPaginas <= 1) return; //validacion de las paginas en el catalogo
+
+        //boton anterior
+        let btnPrev = $('<button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-left"></i></button>');
+        if (paginaActual === 1) btnPrev.prop('disabled', true);
+        btnPrev.on('click', function () {
+            if (paginaActual > 1) {
+                paginaActual--;
+                aplicarPaginacion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        $container.append(btnPrev);
+
+        // botones numericos
+        for (let i = 1; i <= totalPaginas; i++) {
+            let btn = $(`<button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center fw-semibold text-secondary btn-pagination">${i}</button>`);
+            if (i === paginaActual) {
+                btn.removeClass('btn-light text-secondary border-light-subtle').addClass('active');
+            }
+            btn.on('click', function () {
+                paginaActual = i;
+                aplicarPaginacion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            $container.append(btn);
+        }
+
+        // boton siguiente
+        let btnNext = $('<button class="btn btn-light rounded-circle border-light-subtle d-flex align-items-center justify-content-center btn-pagination"><i class="fa-solid fa-chevron-right"></i></button>');
+        if (paginaActual === totalPaginas) btnNext.prop('disabled', true);
+        btnNext.on('click', function () {
+            if (paginaActual < totalPaginas) {
+                paginaActual++;
+                aplicarPaginacion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        $container.append(btnNext);
+    }
+
+    //aplicar los filtros al catalogo
+    function aplicarFiltros() {
+        let valorBusqueda = '';
+        let inputBuscarCat = $('input[placeholder="Buscar por nombre, raza..."]');
+        if (inputBuscarCat.length) {
+            valorBusqueda = inputBuscarCat.val().toLowerCase();
+        }
+
         let especiesSeleccionadas = [];
         let estadosSeleccionados = [];
 
@@ -27,27 +86,43 @@ $(document).ready(function () {
         $('.filtro-chk[data-tipo="estado"]:checked').each(function () {
             estadosSeleccionados.push($(this).val());
         });
-        $('.mascota-item').each(function () {
-            let especieMascota = $(this).data('especie');
-            let estadoMascota = $(this).data('estado');
 
+        $('.mascota-item').each(function () {
+            let $item = $(this);
+            let textoTarjeta = $item.text().toLowerCase();
+            let especieMascota = $item.data('especie');
+            let estadoMascota = $item.data('estado');
+
+            let cumpleBusqueda = valorBusqueda === '' || textoTarjeta.indexOf(valorBusqueda) > -1;
             let cumpleEspecie = especiesSeleccionadas.length === 0 || especiesSeleccionadas.includes(especieMascota);
             let cumpleEstado = estadosSeleccionados.length === 0 || estadosSeleccionados.includes(estadoMascota);
 
-            if (cumpleEspecie && cumpleEstado) {
-                $(this).fadeIn(200);
+            if (cumpleBusqueda && cumpleEspecie && cumpleEstado) {
+                $item.removeClass('filtered-out');
             } else {
-                $(this).fadeOut(200);
+                $item.addClass('filtered-out');
+                $item.hide();
             }
         });
-    });
 
-    // limpiar filtros
+        paginaActual = 1;
+        aplicarPaginacion();
+    }
+
+    //events
+    let inputBuscarCat = $('input[placeholder="Buscar por nombre, raza..."]');
+    if (inputBuscarCat.length) {
+        inputBuscarCat.on('keyup', aplicarFiltros);
+    }
+
+    $('.filtro-chk').on('change', aplicarFiltros);
+
     $('#btn-clear-filters').on('click', function () {
-        $('.filtro-chk').prop('checked', false).trigger('change');
+        $('.filtro-chk').prop('checked', false);
+        if (inputBuscarCat.length) inputBuscarCat.val('');
+        aplicarFiltros();
     });
 
-    // ordenar por nombre o recientes
     if ($('.mascota-item').length > 0) {
         // orden inicial
         $('.mascota-item').each(function (index) {
@@ -76,6 +151,8 @@ $(document).ready(function () {
             $.each(items, function (i, item) {
                 $contenedor.append(item);
             });
+            aplicarPaginacion();
         });
     }
+    aplicarFiltros();
 });
