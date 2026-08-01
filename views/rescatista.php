@@ -23,12 +23,6 @@ include 'layout/header.php';
               <span class="fw-semibold <?= (isset($_GET['tab']) && $_GET['tab'] == 'solicitudes') ? '' : 'text-secondary' ?>"><i class="fa-regular fa-file-lines me-3"></i>Solicitudes</span>
               <span class="badge rounded-pill badge-orange"><?= count($solicitudes) ?></span>
             </a>
-            <a href="#" class="nav-link text-dark rounded-3 p-3 d-flex align-items-center side-link">
-              <span class="fw-semibold text-secondary"><i class="fa-solid fa-chart-simple me-3"></i>Estadisticas</span>
-            </a>
-            <a href="#" class="nav-link text-dark rounded-3 p-3 d-flex align-items-center side-link">
-              <span class="fw-semibold text-secondary"><i class="fa-solid fa-gear me-3"></i>Configuracion</span>
-            </a>
           </nav>
         </div>
 
@@ -36,13 +30,13 @@ include 'layout/header.php';
           <div class="col-6">
             <div class="bg-white rounded-4 shadow-sm p-3 border border-light-subtle text-center h-100">
               <p class="text-muted small fw-semibold mb-1">Adoptados</p>
-              <h2 class="fw-bold text-verde mb-0">48</h2>
+              <h2 class="fw-bold text-verde mb-0"><?= $mascotasAdoptadas ?></h2>
             </div>
           </div>
           <div class="col-6">
             <div class="bg-white rounded-4 shadow-sm p-3 border border-light-subtle text-center h-100">
-              <p class="text-muted small fw-semibold mb-1">Nuevos</p>
-              <h2 class="fw-bold mb-0 text-orange">3</h2>
+              <p class="text-muted small fw-semibold mb-1">Disponibles</p>
+              <h2 class="fw-bold mb-0 text-orange"><?= $mascotasDisponibles ?></h2>
             </div>
           </div>
         </div>

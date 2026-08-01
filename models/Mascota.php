@@ -213,5 +213,16 @@ class Mascota
         $stmt = $this->conn->query("SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE estado = 'Adoptado'");
         return $stmt->fetch()['total'];
     }
+
+    // contar mascotas por rescatista y estado
+    public function countByRescatistaAndEstado($usuario_id, $estado)
+    {
+        $query = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE usuario_id = :usuario_id AND estado = :estado";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":usuario_id", $usuario_id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->execute();
+        return $stmt->fetch()['total'];
+    }
 }
 ?>

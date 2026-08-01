@@ -115,6 +115,11 @@ class UsuarioController
         require_once 'models/Mascota.php';
         $mascotaModel = new Mascota();
         $mascotas = $mascotaModel->getByRescatista($_SESSION['usuario_id']);
+        
+        // metricas del rescatista
+        $mascotasAdoptadas = $mascotaModel->countByRescatistaAndEstado($_SESSION['usuario_id'], 'Adoptado');
+        $mascotasDisponibles = $mascotaModel->countByRescatistaAndEstado($_SESSION['usuario_id'], 'Disponible');
+
         // trae las solicitudes
         require_once 'models/Solicitud.php';
         $solicitudModel = new Solicitud();
