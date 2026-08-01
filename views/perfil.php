@@ -31,13 +31,13 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="nombre" class="form-label fw-semibold">Nombre *</label>
-                <input type="text" class="form-control form-control-lg border-light-subtle bg-light" id="nombre"
-                  name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+                <input type="text" class="form-control form-control-lg border-light-subtle" id="nombre" name="nombre"
+                  value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
                 <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
               </div>
               <div class="col-md-6">
                 <label for="apellido" class="form-label fw-semibold">Apellido *</label>
-                <input type="text" class="form-control form-control-lg border-light-subtle bg-light" id="apellido"
+                <input type="text" class="form-control form-control-lg border-light-subtle" id="apellido"
                   name="apellido" value="<?= htmlspecialchars($usuario['apellido']) ?>" required>
                 <div class="invalid-feedback">Por favor ingresa tu apellido.</div>
               </div>
@@ -46,13 +46,13 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
-                <input type="email" class="form-control form-control-lg border-light-subtle bg-light" id="correo"
+                <input type="email" class="form-control form-control-lg border-light-subtle" id="correo"
                   value="<?= htmlspecialchars($usuario['correo']) ?>" disabled>
                 <div class="form-text">El correo electrónico no puede ser modificado.</div>
               </div>
               <div class="col-md-6">
                 <label for="telefono" class="form-label fw-semibold">Teléfono</label>
-                <input type="text" class="form-control form-control-lg border-light-subtle bg-light" id="telefono"
+                <input type="text" class="form-control form-control-lg border-light-subtle" id="telefono"
                   name="telefono" value="<?= htmlspecialchars($usuario['telefono']) ?>">
               </div>
             </div>
@@ -65,13 +65,13 @@ include 'layout/header.php';
             <div class="row g-4 mb-5">
               <div class="col-md-6">
                 <label for="contrasena" class="form-label fw-semibold">Nueva Contraseña</label>
-                <input type="password" class="form-control form-control-lg border-light-subtle bg-light" id="contrasena"
+                <input type="password" class="form-control form-control-lg border-light-subtle" id="contrasena"
                   name="contrasena" placeholder="Mínimo 6 caracteres">
               </div>
               <div class="col-md-6">
                 <label for="contrasena_confirm" class="form-label fw-semibold">Confirmar Nueva Contraseña</label>
-                <input type="password" class="form-control form-control-lg border-light-subtle bg-light"
-                  id="contrasena_confirm" placeholder="Debe coincidir">
+                <input type="password" class="form-control form-control-lg border-light-subtle" id="contrasena_confirm"
+                  placeholder="Debe coincidir">
               </div>
             </div>
 
@@ -131,7 +131,7 @@ include 'layout/header.php';
                           <i class="fa-solid fa-user-shield me-1 text-verde"></i> Rescatista: <span
                             class="fw-semibold text-dark"><?= htmlspecialchars($sol['rescatista_nombre']) ?></span>
                         </p>
-                        <div class="p-3 bg-light rounded-3 mt-2 border border-light-subtle">
+                        <div class="p-3 bg-white shadow-sm rounded-4 mt-2 border border-light-subtle">
                           <p class="mb-0 text-dark small fst-italic">"<?= htmlspecialchars($sol['mensaje']) ?>"</p>
                         </div>
                       </div>

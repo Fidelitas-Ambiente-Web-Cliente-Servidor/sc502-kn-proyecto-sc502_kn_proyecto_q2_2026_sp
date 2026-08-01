@@ -27,13 +27,13 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="nombre" class="form-label fw-semibold">Nombre de la Mascota *</label>
-                <input type="text" class="form-control form-control-lg border-light-subtle bg-light" id="nombre" name="nombre" value="<?= htmlspecialchars($mascota['nombre'] ?? '') ?>" required>
+                <input type="text" class="form-control form-control-lg border-light-subtle" id="nombre" name="nombre" value="<?= htmlspecialchars($mascota['nombre'] ?? '') ?>" required>
                 <div class="invalid-feedback">Por favor ingresa el nombre de la mascota.</div>
               </div>
               
               <div class="col-md-6">
                 <label for="edad" class="form-label fw-semibold">Edad (años) *</label>
-                <input type="number" class="form-control form-control-lg border-light-subtle bg-light" id="edad" name="edad" min="0" max="30" value="<?= htmlspecialchars($mascota['edad'] ?? '') ?>" required>
+                <input type="number" class="form-control form-control-lg border-light-subtle" id="edad" name="edad" min="0" max="30" value="<?= htmlspecialchars($mascota['edad'] ?? '') ?>" required>
                 <div class="invalid-feedback">Por favor ingresa una edad válida.</div>
               </div>
             </div>
@@ -41,7 +41,7 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="especie_id" class="form-label fw-semibold">Especie *</label>
-                <select class="form-select form-select-lg border-light-subtle bg-light" id="especie_id" name="especie_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="especie_id" name="especie_id" required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona una especie</option>
                   <?php foreach ($especies as $especie): ?>
                     <option value="<?= $especie['id'] ?>" <?= ($mascota && $mascota['especie_id'] == $especie['id']) ? 'selected' : '' ?>>
@@ -54,7 +54,7 @@ include 'layout/header.php';
 
               <div class="col-md-6">
                 <label for="raza_id" class="form-label fw-semibold">Raza *</label>
-                <select class="form-select form-select-lg border-light-subtle bg-light" id="raza_id" name="raza_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="raza_id" name="raza_id" required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona una raza</option>
                   <?php foreach ($razas as $raza): ?>
                     <option value="<?= $raza['id'] ?>" <?= ($mascota && $mascota['raza_id'] == $raza['id']) ? 'selected' : '' ?>>
@@ -69,7 +69,7 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-md-6">
                 <label for="tamano_id" class="form-label fw-semibold">Tamaño *</label>
-                <select class="form-select form-select-lg border-light-subtle bg-light" id="tamano_id" name="tamano_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="tamano_id" name="tamano_id" required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona un tamaño</option>
                   <?php foreach ($tamanos as $tamano): ?>
                     <option value="<?= $tamano['id'] ?>" <?= ($mascota && $mascota['tamano_id'] == $tamano['id']) ? 'selected' : '' ?>>
@@ -82,7 +82,7 @@ include 'layout/header.php';
 
               <div class="col-md-6">
                 <label for="energia_id" class="form-label fw-semibold">Nivel de Energía *</label>
-                <select class="form-select form-select-lg border-light-subtle bg-light" id="energia_id" name="energia_id" required>
+                <select class="form-select form-select-lg border-light-subtle" id="energia_id" name="energia_id" required>
                   <option value="" disabled <?= !$mascota ? 'selected' : '' ?>>Selecciona el nivel de energía</option>
                   <?php foreach ($energias as $energia): ?>
                     <option value="<?= $energia['id'] ?>" <?= ($mascota && $mascota['energia_id'] == $energia['id']) ? 'selected' : '' ?>>
@@ -97,7 +97,7 @@ include 'layout/header.php';
             <div class="row g-4 mb-4">
               <div class="col-12">
                 <label for="foto_path" class="form-label fw-semibold">URL de Fotografía *</label>
-                <input type="url" class="form-control form-control-lg border-light-subtle bg-light" id="foto_path" name="foto_path" placeholder="https://ejemplo.com/imagen.jpg" value="<?= htmlspecialchars($mascota['foto_path'] ?? '') ?>" required>
+                <input type="url" class="form-control form-control-lg border-light-subtle" id="foto_path" name="foto_path" placeholder="https://ejemplo.com/imagen.jpg" value="<?= htmlspecialchars($mascota['foto_path'] ?? '') ?>" required>
                 <div class="form-text">Pega un enlace directo a la imagen de la mascota.</div>
                 <div class="invalid-feedback">Por favor ingresa una URL válida.</div>
               </div>
@@ -105,12 +105,12 @@ include 'layout/header.php';
 
             <div class="mb-4">
               <label for="historia" class="form-label fw-semibold">Historia / Descripción</label>
-              <textarea class="form-control form-control-lg border-light-subtle bg-light" id="historia" name="historia" rows="4" placeholder="Cuéntanos un poco sobre la mascota..."><?= htmlspecialchars($mascota['historia'] ?? '') ?></textarea>
+              <textarea class="form-control form-control-lg border-light-subtle" id="historia" name="historia" rows="4" placeholder="Cuéntanos un poco sobre la mascota..."><?= htmlspecialchars($mascota['historia'] ?? '') ?></textarea>
             </div>
 
             <div class="mb-5">
               <label for="estado" class="form-label fw-semibold">Estado de la Mascota *</label>
-              <select class="form-select form-select-lg border-light-subtle bg-light" id="estado" name="estado" required>
+              <select class="form-select form-select-lg border-light-subtle" id="estado" name="estado" required>
                 <option value="Disponible" <?= ($mascota && $mascota['estado'] == 'Disponible') ? 'selected' : '' ?>>Disponible</option>
                 <option value="Urgente" <?= ($mascota && $mascota['estado'] == 'Urgente') ? 'selected' : '' ?>>Urgente</option>
                 <option value="Adoptado" <?= ($mascota && $mascota['estado'] == 'Adoptado') ? 'selected' : '' ?>>Adoptado</option>

@@ -71,6 +71,16 @@ include 'views/layout/header.php';
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="fa-solid fa-dog text-warning me-2"></i> Gestión de Razas
+                    </h5>
+                    <p class="text-muted">Añade razas nuevas a la base de datos para que los rescatistas las usen.</p>
+                    <a href="index.php?action=admin_razas" class="btn btn-outline-warning">Ir a Razas</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

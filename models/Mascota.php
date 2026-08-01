@@ -115,7 +115,11 @@ class Mascota
                     historia = :historia,
                     foto_path = :foto_path,
                     estado = :estado
-                  WHERE id = :id AND usuario_id = :usuario_id";
+                  WHERE id = :id";
+
+        if (isset($datos['usuario_id'])) {
+            $query .= " AND usuario_id = :usuario_id";
+        }
 
         $stmt = $this->conn->prepare($query);
 
@@ -129,7 +133,10 @@ class Mascota
         $stmt->bindParam(":foto_path", $datos['foto_path']);
         $stmt->bindParam(":estado", $datos['estado']);
         $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":usuario_id", $datos['usuario_id']); // verificacion de seguridad
+        
+        if (isset($datos['usuario_id'])) {
+            $stmt->bindParam(":usuario_id", $datos['usuario_id']); // verificacion de seguridad
+        }
 
         return $stmt->execute();
     }
@@ -146,12 +153,20 @@ class Mascota
     }
 
     // eliminar mascota
-    public function delete($id, $usuario_id)
+    public function delete($id, $usuario_id = null)
     {
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id AND usuario_id = :usuario_id";
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
+        if ($usuario_id !== null) {
+            $query .= " AND usuario_id = :usuario_id";
+        }
+        
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":usuario_id", $usuario_id);
+        
+        if ($usuario_id !== null) {
+            $stmt->bindParam(":usuario_id", $usuario_id);
+        }
+        
         return $stmt->execute();
     }
 

@@ -69,6 +69,7 @@
                   <li><a class="dropdown-item" href="index.php?action=admin_dashboard"><i class="fa-solid fa-chart-line me-2"></i> Dashboard Admin</a></li>
                   <li><a class="dropdown-item" href="index.php?action=admin_usuarios"><i class="fa-solid fa-users me-2"></i> Usuarios</a></li>
                   <li><a class="dropdown-item" href="index.php?action=admin_mascotas"><i class="fa-solid fa-paw me-2"></i> Todas las Mascotas</a></li>
+                  <li><a class="dropdown-item" href="index.php?action=admin_razas"><i class="fa-solid fa-dog me-2"></i> Razas</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php elseif (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 2): ?>
                   <li><a class="dropdown-item" href="index.php?action=rescatista"><i class="fa-solid fa-list-check me-2"></i> Mis Mascotas</a></li>

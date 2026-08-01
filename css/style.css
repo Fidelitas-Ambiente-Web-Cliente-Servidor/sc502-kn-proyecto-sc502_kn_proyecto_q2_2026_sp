@@ -44,6 +44,14 @@ h6 {
   color: var(--verde-esperanza) !important;
 }
 
+.bg-verde {
+  background-color: var(--verde-esperanza) !important;
+}
+
+.bg-navy {
+  background-color: var(--dark-navy) !important;
+}
+
 .btn-verde {
   background-color: var(--verde-esperanza);
   color: var(--white);

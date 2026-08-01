@@ -82,5 +82,92 @@ class AdminController
         $page_title = "Panel de Administrador - Mascotas";
         require 'views/admin/mascotas.php';
     }
+
+    // ver razas
+    public function razas()
+    {
+        require_once 'models/Raza.php';
+        require_once 'models/Mascota.php'; // para getEspecies()
+        
+        $razaModel = new Raza();
+        $razas = $razaModel->getAll();
+        
+        $mascotaModel = new Mascota();
+        $especies = $mascotaModel->getEspecies();
+
+        $page_title = "Panel de Administrador - Razas";
+        require 'views/admin/razas.php';
+    }
+
+    // crear raza post
+    public function crearRaza()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nombre_raza = trim($_POST['nombre_raza']);
+            $especie_id = $_POST['especie_id'] ?? null;
+            
+            if (!empty($nombre_raza) && !empty($especie_id)) {
+                require_once 'models/Raza.php';
+                $razaModel = new Raza();
+                $razaModel->create($nombre_raza, $especie_id);
+            }
+        }
+        header("Location: index.php?action=admin_razas");
+        exit();
+    }
+
+    // ver form editar raza
+    public function editarRaza()
+    {
+        if (isset($_GET['id'])) {
+            require_once 'models/Raza.php';
+            require_once 'models/Mascota.php'; // para getEspecies
+            $razaModel = new Raza();
+            $raza = $razaModel->getById($_GET['id']);
+            
+            $mascotaModel = new Mascota();
+            $especies = $mascotaModel->getEspecies();
+            
+            if ($raza) {
+                $page_title = "Panel de Administrador - Editar Raza";
+                require 'views/admin/raza_editar.php';
+            } else {
+                header("Location: index.php?action=admin_razas");
+                exit();
+            }
+        } else {
+            header("Location: index.php?action=admin_razas");
+            exit();
+        }
+    }
+
+    // post editar raza
+    public function editarRazaPost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
+            $nombre_raza = trim($_POST['nombre_raza']);
+            $especie_id = $_POST['especie_id'] ?? null;
+            
+            if (!empty($nombre_raza) && !empty($especie_id)) {
+                require_once 'models/Raza.php';
+                $razaModel = new Raza();
+                $razaModel->update($_GET['id'], $nombre_raza, $especie_id);
+            }
+        }
+        header("Location: index.php?action=admin_razas");
+        exit();
+    }
+
+    // eliminar raza
+    public function eliminarRaza()
+    {
+        if (isset($_GET['id'])) {
+            require_once 'models/Raza.php';
+            $razaModel = new Raza();
+            $razaModel->delete($_GET['id']);
+        }
+        header("Location: index.php?action=admin_razas");
+        exit();
+    }
 }
 ?>

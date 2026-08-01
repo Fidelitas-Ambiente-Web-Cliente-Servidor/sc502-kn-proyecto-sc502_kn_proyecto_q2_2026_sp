@@ -34,7 +34,12 @@ $rutas = [
     'admin_usuarios' => ['controller' => 'AdminController', 'method' => 'usuarios'],
     'admin_toggle_usuario' => ['controller' => 'AdminController', 'method' => 'toggleUsuario'],
     'admin_cambiar_rol' => ['controller' => 'AdminController', 'method' => 'cambiarRol'],
-    'admin_mascotas' => ['controller' => 'AdminController', 'method' => 'mascotas']
+    'admin_mascotas' => ['controller' => 'AdminController', 'method' => 'mascotas'],
+    'admin_razas' => ['controller' => 'AdminController', 'method' => 'razas'],
+    'admin_crear_raza' => ['controller' => 'AdminController', 'method' => 'crearRaza'],
+    'admin_editar_raza' => ['controller' => 'AdminController', 'method' => 'editarRaza'],
+    'admin_editar_raza_post' => ['controller' => 'AdminController', 'method' => 'editarRazaPost'],
+    'admin_eliminar_raza' => ['controller' => 'AdminController', 'method' => 'eliminarRaza']
 ];
 
 if (array_key_exists($action, $rutas)) {

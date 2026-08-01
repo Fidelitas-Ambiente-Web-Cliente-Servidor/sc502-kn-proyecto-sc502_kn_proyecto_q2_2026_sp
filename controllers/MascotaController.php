@@ -31,10 +31,10 @@ class MascotaController
         }
     }
 
-    // solo rescatistas pueden gestionar mascotas
+    // solo rescatistas y administradores pueden gestionar mascotas
     private function verificarRescatista()
     {
-        if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] != 2) {
+        if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], [1, 2])) {
             header("Location: index.php?action=login");
             exit();
         }
@@ -76,9 +76,10 @@ class MascotaController
                 'foto_path' => $_POST['foto_path'], // usamos url
                 'estado' => $_POST['estado']
             ];
-            //si se crea redirige al rescatista
+            //si se crea redirige al rescatista o admin
             if ($mascotaModel->create($datos)) {
-                header("Location: index.php?action=rescatista&success=1");
+                $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+                header("Location: index.php?action=$redirect&success=1");
                 exit();
             } else { //sino devuelve error
                 header("Location: index.php?action=mascota_crear&error=1");
@@ -95,8 +96,8 @@ class MascotaController
             $id = $_GET['id'];
             $mascotaModel = new Mascota();
             $mascota = $mascotaModel->getById($id);
-            // validar que la mascota le pertenezca
-            if ($mascota && $mascota['usuario_id'] == $_SESSION['usuario_id']) {
+            // validar que la mascota le pertenezca o sea admin
+            if ($mascota && ($mascota['usuario_id'] == $_SESSION['usuario_id'] || $_SESSION['usuario_rol'] == 1)) {
                 $especies = $mascotaModel->getEspecies();
                 $razas = $mascotaModel->getRazas();
                 $tamanos = $mascotaModel->getTamanos();
@@ -107,11 +108,13 @@ class MascotaController
                 $extra_js = "rescatista.js";
                 require_once 'views/mascota_form.php';
             } else {
-                header("Location: index.php?action=rescatista&error=acceso_denegado");
+                $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+                header("Location: index.php?action=$redirect&error=acceso_denegado");
                 exit();
             }
         } else {
-            header("Location: index.php?action=rescatista");
+            $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+            header("Location: index.php?action=$redirect");
             exit();
         }
     }
@@ -123,8 +126,8 @@ class MascotaController
             $id = $_GET['id'];
             $mascotaModel = new Mascota();
 
+            // en update se mantiene al propietario original si es admin editando otra mascota
             $datos = [
-                'usuario_id' => $_SESSION['usuario_id'], //por seguridad
                 'especie_id' => $_POST['especie_id'],
                 'raza_id' => $_POST['raza_id'],
                 'tamano_id' => $_POST['tamano_id'],
@@ -137,7 +140,8 @@ class MascotaController
             ];
 
             if ($mascotaModel->update($id, $datos)) {
-                header("Location: index.php?action=rescatista&success=1");
+                $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+                header("Location: index.php?action=$redirect&success=1");
                 exit();
             } else {
                 header("Location: index.php?action=mascota_editar&id=" . $id . "&error=1");
@@ -153,11 +157,15 @@ class MascotaController
             $id = $_GET['id'];
             $mascotaModel = new Mascota();
 
-            // borrar de bd, pasando usuario_id como verificacion
-            if ($mascotaModel->delete($id, $_SESSION['usuario_id'])) {
-                header("Location: index.php?action=rescatista&success=eliminado");
+            // borrar de bd, si es admin pasa null para saltar verificacion de usuario
+            $usuario_id = ($_SESSION['usuario_rol'] == 1) ? null : $_SESSION['usuario_id'];
+
+            if ($mascotaModel->delete($id, $usuario_id)) {
+                $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+                header("Location: index.php?action=$redirect&success=eliminado");
             } else {
-                header("Location: index.php?action=rescatista&error=1");
+                $redirect = ($_SESSION['usuario_rol'] == 1) ? "admin_mascotas" : "rescatista";
+                header("Location: index.php?action=$redirect&error=1");
             }
             exit();
         }
