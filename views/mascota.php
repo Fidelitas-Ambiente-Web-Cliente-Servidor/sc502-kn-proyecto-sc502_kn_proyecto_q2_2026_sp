@@ -97,7 +97,8 @@ include 'layout/header.php';
         <!-- Contact Form -->
         <div class="contact-form-card p-4 p-md-5 rounded-4 shadow-sm bg-white">
           <h4 class="fw-bold mb-3 text-dark-navy">Formulario de Contacto</h4>
-          <p class="text-muted mb-4">¿Quieres conocer a <?= htmlspecialchars($mascota['nombre']) ?>? Envíanos un mensaje al rescatista.</p>
+          <p class="text-muted mb-4">¿Quieres conocer a <?= htmlspecialchars($mascota['nombre']) ?>? Envíanos un mensaje
+            al rescatista.</p>
 
           <?php if (isset($_GET['success']) && $_GET['success'] == 'solicitud_enviada'): ?>
             <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
@@ -116,18 +117,21 @@ include 'layout/header.php';
           <?php if (isset($_SESSION['usuario_id'])): ?>
             <form action="index.php?action=solicitud_enviar_post" method="POST">
               <input type="hidden" name="mascota_id" value="<?= $mascota['id'] ?>">
-              
+
               <div class="mb-4">
                 <label class="form-label text-muted small fw-semibold">Nombre Completo</label>
                 <input type="text" class="form-control form-control-lg rounded-3 border-light-subtle form-control-light"
                   value="<?= htmlspecialchars($_SESSION['usuario_nombre']) ?>" disabled>
-                <div class="form-text">Tus datos de contacto (correo y teléfono) se enviarán automáticamente al rescatista.</div>
+                <div class="form-text">Tus datos de contacto (correo y teléfono) se enviarán automáticamente al
+                  rescatista.</div>
               </div>
-              
+
               <div class="mb-4">
                 <label class="form-label text-muted small fw-semibold">Mensaje para el Rescatista *</label>
-                <textarea class="form-control form-control-lg rounded-3 border-light-subtle form-control-light" name="mensaje" rows="4"
-                  placeholder="Cuéntanos un poco sobre tu hogar y por qué quieres adoptar a <?= htmlspecialchars($mascota['nombre']) ?>..." required></textarea>
+                <textarea class="form-control form-control-lg rounded-3 border-light-subtle form-control-light"
+                  name="mensaje" rows="4"
+                  placeholder="Cuéntanos un poco sobre tu hogar y por qué quieres adoptar a <?= htmlspecialchars($mascota['nombre']) ?>..."
+                  required></textarea>
               </div>
               <button type="submit"
                 class="btn btn-verde w-100 btn-lg mb-4 rounded-3 d-flex justify-content-center align-items-center gap-2">
@@ -144,12 +148,14 @@ include 'layout/header.php';
           <hr class="border-light-subtle my-4">
 
           <div class="d-flex align-items-center gap-3">
-            <img src="" alt="" class="rounded-circle object-fit-cover avatar-md">
             <div>
-              <p class="mb-0 text-muted small">Rescatista: <span
-                  class="fw-bold text-dark"><?= htmlspecialchars($mascota['rescatista_nombre']) ?></span></p>
+              <p class="mb-0 text-muted small">Rescatista: <span class="fw-bold text-dark">
+                  <?= htmlspecialchars($mascota['rescatista_nombre']) ?>
+                </span>
+              </p>
               <p class="mb-0 text-verde small fw-semibold">Contacto:
-                <?= htmlspecialchars($mascota['rescatista_telefono']) ?></p>
+                <?= htmlspecialchars($mascota['rescatista_telefono']) ?>
+              </p>
             </div>
           </div>
         </div>

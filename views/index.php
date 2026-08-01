@@ -13,7 +13,7 @@ include 'layout/header.php';
           <span class="badge-info mb-3">Encuentra a tu mejor amigo <i
               class="fa-solid fa-heart ms-1 text-danger"></i></span>
           <h1 class="hero-title fw-extrabold text-navy">
-            Cada huella cuenta <br>una <span>historia de amor</span>.
+            Cada huella cuenta <br>una <span>historia de amor</span>
           </h1>
           <p class="lead mb-4 text-secondary">
             Únete a nuestra comunidad de rescatistas y adoptantes. Juntos, transformamos vidas peludas en hogares
@@ -31,7 +31,9 @@ include 'layout/header.php';
         <div class="col-lg-6">
           <div class="hero-img-container">
             <!-- aqui va la foto -->
-            <img src="" alt="Mujer feliz con su perro" class="hero-img img-fluid">
+            <img
+              src="https://1.bp.blogspot.com/-r4mZo-LPA7k/UIXH4vm7duI/AAAAAAABMTU/AYN3Co5TssA/s1600/mujer-jugando-con-su-lindo-perro-woman-playing-with-her-pet-dog.jpg"
+              alt="Mujer feliz con su perro" class="hero-img img-fluid">
             <div class="hero-stats-badge">
               <i class="fa-solid fa-circle-check fs-3"></i>
               <div>
